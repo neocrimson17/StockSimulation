@@ -6,5 +6,6 @@ package edu.ycp.cs320.stocksimulation.shared;
  * @author kmusco
  */
 public class Stock {
+	// Add changed
 
 }
