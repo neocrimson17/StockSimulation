@@ -7,5 +7,12 @@ package edu.ycp.cs320.stocksimulation.shared;
  */
 public class Stock {
 	// Add changed
+	private int NumOfstock;
+	private int stockValue;
+	
+	public void stock(){
+		
+	}
+	
 
 }
