@@ -7,12 +7,15 @@ package edu.ycp.cs320.stocksimulation.shared;
  */
 public class Stock {
 	// Add changed
-	private int NumOfstock;
-	private int stockValue;
+	private String getName;
+	private String getSymbol;
 	
-	public void stock(){
-		
+	public void getName(String name){
+		this.getName = name;
 	}
 	
+	public void getSymbol(String symbol){
+		this.getSymbol = symbol;
+	}
 
 }
