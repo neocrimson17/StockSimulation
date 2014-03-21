@@ -1,0 +1,2 @@
+serviceClass: edu.ycp.cs320.stocksimulation.client.GreetingService
+path: 9EBD76C89FFEB54A9CABF4C0E126B13A.gwt.rpc

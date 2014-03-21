@@ -16,6 +16,13 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.user.client.ui.ValueBoxBase.TextAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -39,23 +46,24 @@ public class StockSimulationWebApp implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		final Button sendButton = new Button("Send");
-		final TextBox nameField = new TextBox();
-		nameField.setText("GWT User");
-		final Label errorLabel = new Label();
-
-		// We can add style names to widgets
-		sendButton.addStyleName("sendButton");
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
-		RootPanel.get("nameFieldContainer").add(nameField);
-		RootPanel.get("sendButtonContainer").add(sendButton);
-		RootPanel.get("errorLabelContainer").add(errorLabel);
-
-		// Focus the cursor on the name field when the app loads
-		nameField.setFocus(true);
-		nameField.selectAll();
+		RootPanel rootPanel = RootPanel.get("nameFieldContainer");
+		
+		AbsolutePanel absolutePanel = new AbsolutePanel();
+		rootPanel.add(absolutePanel, 0, 10);
+		absolutePanel.setSize("679px", "547px");
+		
+		TextBox txtbxUsername = new TextBox();
+		txtbxUsername.setText("Username");
+		absolutePanel.add(txtbxUsername, 312, 10);
+		txtbxUsername.setSize("115px", "18px");
+		
+		TextBox txtbxPassword = new TextBox();
+		txtbxPassword.setText("Password");
+		absolutePanel.add(txtbxPassword, 443, 10);
+		txtbxPassword.setSize("115px", "18px");
 
 		// Create the popup dialog box
 		final DialogBox dialogBox = new DialogBox();
@@ -146,7 +154,5 @@ public class StockSimulationWebApp implements EntryPoint {
 
 		// Add a handler to send the name to the server
 		MyHandler handler = new MyHandler();
-		sendButton.addClickHandler(handler);
-		nameField.addKeyUpHandler(handler);
 	}
 }
