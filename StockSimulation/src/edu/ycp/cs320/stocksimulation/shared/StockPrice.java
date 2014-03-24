@@ -1,12 +1,32 @@
 package edu.ycp.cs320.stocksimulation.shared;
 
-public class StockPrice {
+import java.math.BigDecimal;
+import java.util.Currency;
+import java.util.Date;
 
-	private int pricePerShare;
-	private Stock stock;
+public class StockPrice {
+	// fields
+	private Money price;
+	private Date day;
 	
-	
-	public void pricePerStock(int price){
+	public StockPrice(){
 		
 	}
+	
+	//price per share
+	public Money pricePerShare(){
+		Money result  = new Money();
+		
+		result.setAmount(price.getAmount());
+		
+		return result;
+	}
+	// timestamp
+	public Long timeStamp(Date day){
+		this.day = day;
+		
+		return day.getTime();
+	}
+	
+	
 }
