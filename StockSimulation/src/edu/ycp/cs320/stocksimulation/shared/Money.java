@@ -17,7 +17,12 @@ public class Money {
 	
 	// constructor
 	public Money(){
+		amount = new BigDecimal(0);
+	}
 	
+	// constructor taking an amount of money as an argument
+	public Money(BigDecimal amount) {
+		this.amount = amount;
 	}
 	
 	// method to get amount of money
@@ -28,4 +33,11 @@ public class Money {
 	public void setAmount(BigDecimal amountMoney){
 		this.amount = amountMoney;
 	}
+
+	// Subtract given amount of money, returning a new amount of money
+	public Money subtract(Money money) {
+		return new Money(amount.subtract(money.getAmount()));
+	}
+	
+	// TODO: other operations (add, etc.)
 }

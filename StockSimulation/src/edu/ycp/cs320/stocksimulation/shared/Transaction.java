@@ -4,7 +4,7 @@ import java.util.Date;
 public class Transaction {
 	// field(s)
 	private int id;
-	private Date day;
+	private long timestamp;
 	
 	// constructor
 	public Transaction(){
@@ -22,9 +22,11 @@ public class Transaction {
 	}
 	
 	// timestamp
-	public Long timeStamp(Date day){
-		this.day = day;
-		
-		return day.getTime();
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
+	
+	public long getTimestamp() {
+		return timestamp;
 	}
 }
