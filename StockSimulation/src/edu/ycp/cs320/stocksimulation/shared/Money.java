@@ -39,5 +39,8 @@ public class Money {
 		return new Money(amount.subtract(money.getAmount()));
 	}
 	
-	// TODO: other operations (add, etc.)
+	// Add given amount of money, return a new amount of money
+	public Money add(Money money) {
+		return new Money(amount.add(money.getAmount()));
+	}
 }

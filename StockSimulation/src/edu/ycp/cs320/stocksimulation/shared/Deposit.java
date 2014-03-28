@@ -5,7 +5,7 @@ public class Deposit extends CashTransaction {
 	@Override
 	public Money moneyTransaction(Money money) {
 		// TODO Auto-generated method stub
-		return null;
+		return money.add(this.getMoney());
 	}
 
 
