@@ -5,21 +5,39 @@ public class User {
 	private String lastName;
 	private String email;
 	
-	public User(String firstName, String lastName, String email){
+	public User(){
+		firstName = null;
+		lastName = null;
+		email = null;
+	}
+	
+	public void setUser(String lastName, String firstName, String email){
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 	}
 	
-	public void getFirstName(String firstName){
+	public void setFirstName(String firstName){
 		this.firstName = firstName;
 	}
 	
-	public void getLastName(String lastName){
+	public void setLastName(String lastName){
 		this.lastName = lastName;
 	}
 	
-	public void getEmail(String email){
+	public void setEmail(String email){
 		this.email = email;
+	}
+	
+	public String getFirstName(){
+		return firstName;
+	}
+	
+	public String getLastName(){
+		return lastName;
+	}
+	
+	public String getEmail(){
+		return email;
 	}
 }

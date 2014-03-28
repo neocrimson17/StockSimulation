@@ -1,21 +1,60 @@
 package edu.ycp.cs320.stocksimulation.shared;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents a stock.
  * 
  * @author kmusco
  */
 public class Stock {
-	// Add changed
-	private String getName;
-	private String getSymbol;
 	
-	public void getName(String name){
-		this.getName = name;
+	// fields
+	private Integer stockPrice;
+	private String stockName;
+	private String tickerSymbol;
+	
+	// Length of the list determines how many shares there are. Value of entry
+	// determines the price of each share.
+	List<Long> shares = new ArrayList<Long>(); 
+	// constructor
+	public Stock(){
+		
 	}
 	
-	public void getSymbol(String symbol){
-		this.getSymbol = symbol;
+	// Return the list of shares
+	public static List<Long> getShares(){
+		return shares;
+	}
+	
+	// get the type of the stock
+	public String getName(){
+		return stockName;
+	}
+	// set the type of stock 
+	public void setName(String name){
+		this.stockName = name;
+	}
+	// set the  symbol (a ticker of sort)
+	// example: Google will be "GOOG"
+	public void setSymbol(String symbol){
+		this.tickerSymbol = symbol;
+	}
+	
+	// get the ticker symbol for the stock
+	public String getSymbol(){
+		return tickerSymbol;
+	}
+	
+	// method to get a stock price
+	public int getStockPrice(){
+		return stockPrice;
+	}
+	
+	// method to set the price of stock
+	public void setStockPrice(int price){
+		this.stockPrice = price;
 	}
 
 }
