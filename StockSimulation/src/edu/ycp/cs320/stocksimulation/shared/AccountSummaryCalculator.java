@@ -9,7 +9,6 @@ public class AccountSummaryCalculator {
 		List<Transaction> transactionList = account.getTransactionList();
 		
 		Money totalCash = new Money();
-		//Money totalStockValue = new Money();
 		
 		// map of names of stocks owned to number of shares
 		Map<String, Integer> stocksOwned = new HashMap<String, Integer>();
