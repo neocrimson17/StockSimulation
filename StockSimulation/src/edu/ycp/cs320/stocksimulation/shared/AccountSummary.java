@@ -4,7 +4,11 @@ public class AccountSummary {
 	
 	private int cash;
 	private int stockWorth;
-	private String timeStamp;
+	private long timeStamp;
+	
+	public AccountSummary(){
+		
+	}
 	
 	public void getCash(int cash){
 		this.cash = cash;
@@ -14,7 +18,7 @@ public class AccountSummary {
 		this.stockWorth = stockWorth;
 	}
 	
-	public void getTimeStamp(String timeStamp){
+	public void getTimeStamp(long timeStamp){
 		this.timeStamp = timeStamp;
 	}
 
