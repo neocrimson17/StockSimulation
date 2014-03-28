@@ -16,11 +16,12 @@ public class StockPrice {
 	
 	//price per share
 	public Money getPrice(){
-		Money result  = new Money();
-		
-		result.setAmount(price.getAmount());
-		
-		return result;
+//		Money result  = new Money();
+//		
+//		result.setAmount(price.getAmount());
+//		
+//		return result;
+		return price;
 	}
 	
 	public void setTimestamp(long timestamp) {

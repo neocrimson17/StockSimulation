@@ -10,8 +10,12 @@ public class AccountSummaryCalculator {
 		
 		Money totalCash = new Money();
 		
+		/*
 		// map of names of stocks owned to number of shares
 		Map<String, Integer> stocksOwned = new HashMap<String, Integer>();
+		*/
+		// Keep track of which stocks the account owns
+		StockPortfolio stockPortfolio = new StockPortfolio();
 		
 		for (Transaction txn : transactionList) {
 			if (txn.getTimestamp() >= beginTimestamp && txn.getTimestamp() <= endTimestamp) {
@@ -24,13 +28,20 @@ public class AccountSummaryCalculator {
 				} else if (txn instanceof StockTransaction) {
 					StockTransaction stockTxn = (StockTransaction) txn;
 					
-					// ...update stocksOwned...
+					// ...update stockPortfolio...
+					//stockTxn
+					throw new UnsupportedOperationException("Not supported yet");
 				}
 			}
 			
 		}
-		return null;
 		
-		// TODO: create the AccountSummary
+		//return null;
+		AccountSummary result = new AccountSummary();
+		result.setAmountMoney(totalCash);
+		
+		// TODO: set total stock value
+		
+		return result;
 	}
 }

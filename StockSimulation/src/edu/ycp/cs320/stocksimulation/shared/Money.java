@@ -13,7 +13,7 @@ import java.util.Currency;
 public class Money {
 
 	//field(s)
-	private BigDecimal amount;
+	private final BigDecimal amount;
 	
 	// constructor
 	public Money(){
@@ -29,10 +29,6 @@ public class Money {
 	public BigDecimal getAmount(){
 		return amount;
 	}
-	// method to set amount of money
-	public void setAmount(BigDecimal amountMoney){
-		this.amount = amountMoney;
-	}
 
 	// Subtract given amount of money, returning a new amount of money
 	public Money subtract(Money money) {
@@ -42,5 +38,14 @@ public class Money {
 	// Add given amount of money, return a new amount of money
 	public Money add(Money money) {
 		return new Money(amount.add(money.getAmount()));
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || !(obj instanceof Money)) {
+			return false;
+		}
+		Money other = (Money) obj;
+		return this.amount.equals(other.amount);
 	}
 }

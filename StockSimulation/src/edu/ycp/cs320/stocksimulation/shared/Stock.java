@@ -8,7 +8,6 @@ package edu.ycp.cs320.stocksimulation.shared;
 public class Stock {
 	
 	// fields
-	private int stockAmount;
 	private String stockName;
 	private String tickerSymbol;
 	
@@ -36,23 +35,5 @@ public class Stock {
 		return tickerSymbol;
 	}
 	
-	// method to get a stock amount
-	public int getStockAmount(){
-		return stockAmount;
-	}
 	
-	// method to set the amount of stock
-	public void setStockAmount(int amount){
-		this.stockAmount = amount;
-	}
-
-	public int subtract(Stock stock) {
-		// TODO Auto-generated method stub
-		return stockAmount - stock.getStockAmount();
-	}
-	
-	public int add(Stock stock){
-		return stockAmount + stock.getStockAmount();
-	}
-
 }

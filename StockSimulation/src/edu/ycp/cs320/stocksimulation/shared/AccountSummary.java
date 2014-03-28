@@ -6,6 +6,8 @@ public class AccountSummary {
 	private Money totalAmountMoney;
 	private Stock totalAmountStock;
 	
+	// TODO: add fields to keep track of what stocks the user owns, and how many
+	
 	//constructor
 	public AccountSummary(){
 		
