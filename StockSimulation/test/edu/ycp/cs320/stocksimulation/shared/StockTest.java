@@ -14,9 +14,19 @@ public class StockTest {
 		google.setName("Google");
 		google.setSymbol("GOOG");
 	}
-	
+	/**
+	 * test the getName() method
+	 */
 	@Test
 	public void testGetName() {
 		assertEquals("Google", google.getName());
+	}
+	/**
+	 * test the setName() method
+	 */
+	@Test
+	public void testSetName(){
+		google.setName("Amazon");
+		assertEquals("Amazon", google.getName());
 	}
 }
