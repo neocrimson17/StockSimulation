@@ -1,6 +1,5 @@
 package edu.ycp.cs320.stocksimulation.shared;
 
-import java.util.Date;
 public class Transaction {
 	// field(s)
 	private int id;

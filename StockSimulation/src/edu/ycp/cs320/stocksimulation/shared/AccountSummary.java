@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class AccountSummary {
 	
+/*
 	private int cash;
 	private long timeStamp;
 	
@@ -38,14 +39,37 @@ public class AccountSummary {
 	// Get worth of all stocks
 	public long getAccountWorth(){
 		
-		return AccountSummaryCalculator
-		
+		return AccountSummaryCalculator();
 		
 	}
 	
 	// Get date
 	public void getTimeStamp(long timeStamp){
 		this.timeStamp = timeStamp;
+	}*/
+	//fields
+	private Money totalAmountMoney;
+	private Stock totalAmountStock;
+	
+	// TODO: add fields to keep track of what stocks the user owns, and how many
+	
+	//constructor
+	public AccountSummary(){
+		
 	}
-
+	
+	public void setAmountMoney(Money totalMoney){
+		this.totalAmountMoney = totalMoney;
+	}
+	
+	public Money getAmountMoney(){
+		return totalAmountMoney;
+	}
+	
+	public void setAmountStock(Stock totalStock){
+		this.totalAmountStock = totalStock;
+	}
+	public Stock getAmountStock(){
+		return totalAmountStock;
+	}
 }

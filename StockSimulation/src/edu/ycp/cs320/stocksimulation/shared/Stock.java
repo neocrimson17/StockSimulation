@@ -28,11 +28,11 @@ public class Stock {
 		return shares;
 	}
 	
-	// get the type of the stock
+	// get the name of the stock
 	public String getName(){
 		return stockName;
 	}
-	// set the type of stock 
+	// set the name of stock 
 	public void setName(String name){
 		this.stockName = name;
 	}
@@ -56,5 +56,4 @@ public class Stock {
 	public void setStockPrice(int price){
 		this.stockPrice = price;
 	}
-
 }
