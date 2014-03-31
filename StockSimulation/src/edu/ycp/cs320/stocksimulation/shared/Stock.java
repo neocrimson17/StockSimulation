@@ -24,7 +24,7 @@ public class Stock {
 	}
 	
 	// Return the list of shares
-	public static List<Long> getShares(){
+	public List<Long> getShares(){
 		return shares;
 	}
 	
