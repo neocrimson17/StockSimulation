@@ -10,12 +10,14 @@ public class StockPortfolio {
 	}
 	
 	public void addShares(Stock stock, int numShares) {
-		// TODO
-		
+		stocktype.setName(stock.getName());
+		stocktype.setSymbol(stock.getSymbol());
+		this.numshares += numShares;
 	}
 	
 	public void removeShares(Stock stock, int numShares) {
-		// TODO
-		throw new UnsupportedOperationException("Not implemented yet");
+		stocktype.setName(stock.getName());
+		stocktype.setSymbol(stock.getSymbol());
+		this.numshares -= numShares;
 	}
 }
