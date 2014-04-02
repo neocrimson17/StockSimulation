@@ -3,6 +3,7 @@ package edu.ycp.cs320.stocksimulation.server.model.persist;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.ycp.cs320.stocksimulation.shared.Login;
 import edu.ycp.cs320.stocksimulation.shared.Stock;
 import edu.ycp.cs320.stocksimulation.shared.StockHistory;
 import edu.ycp.cs320.stocksimulation.shared.StockPrice;
@@ -33,6 +34,18 @@ public class FakeDatabase implements IDatabase {
 			// No information
 			return new StockHistory();
 		}
+	}
+
+	@Override
+	public boolean getLogin(String username, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Login postLogin(String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
