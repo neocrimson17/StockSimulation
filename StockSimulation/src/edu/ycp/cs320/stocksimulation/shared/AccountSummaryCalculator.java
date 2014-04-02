@@ -29,6 +29,7 @@ public class AccountSummaryCalculator {
 					StockTransaction stockTxn = (StockTransaction) txn;
 					
 					// ...update stockPortfolio...
+				
 					//stockTxn
 					throw new UnsupportedOperationException("Not supported yet");
 				}

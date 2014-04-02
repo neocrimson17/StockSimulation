@@ -4,6 +4,7 @@ public class StockPortfolio {
 	// TODO: fields
 	private int numshares;
 	private Stock stocktype;
+	//Map<String, Integer> stocksOwned = new HashMap<String, Integer>();
 	
 	public StockPortfolio() {
 		
@@ -19,5 +20,10 @@ public class StockPortfolio {
 		stocktype.setName(stock.getName());
 		stocktype.setSymbol(stock.getSymbol());
 		this.numshares -= numShares;
+	}
+	
+	public int getNumShares(Stock stock) {
+		// TODO
+		return 0;
 	}
 }
