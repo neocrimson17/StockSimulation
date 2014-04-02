@@ -1,11 +1,14 @@
 package edu.ycp.cs320.stocksimulation.shared;
 
 public class SellStock extends StockTransaction {
-
+	
+	/**
+	 * A method to allow the user to sell stock
+	 */
 	@Override
-	public Stock stockTransaction(Stock stock) {
-		// TODO Auto-generated method stub
-		return null;
+	public StockPortfolio stockTransaction(StockPortfolio portfolio) {
+		portfolio.subtractShares(getStock(), getNumShare());
+		return portfolio;
 	}
 	
 }

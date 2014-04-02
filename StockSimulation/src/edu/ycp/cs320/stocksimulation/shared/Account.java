@@ -1,5 +1,8 @@
 package edu.ycp.cs320.stocksimulation.shared;
-
+/**
+ * This class represents the account the user has which contains
+ * all the transactions up to this point
+ */
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

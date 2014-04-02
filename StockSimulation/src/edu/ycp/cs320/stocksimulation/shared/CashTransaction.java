@@ -1,5 +1,11 @@
 package edu.ycp.cs320.stocksimulation.shared;
 
+/**
+ * This class represents the cash-transaction 
+ * it is a super class of the Withdrawal class and the Deposit class
+ * @author hdao2
+ *
+ */
 public abstract class CashTransaction extends Transaction {
 	
 	private Money money;
