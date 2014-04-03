@@ -44,15 +44,5 @@ public class StockHistory {
 		}
 		return candidate;
 		
-		/*
-		
-		// TODO: search prices for given stock, find the one that was in effect at the timestamp
-		StockPrice current = new StockPrice();
-		Stock stocktype = new Stock();
-		if (current.getTimestamp() == timestamp){
-			current.getPrice();
-		}
-		return null; // FIXME
-		*/
 	}
 }

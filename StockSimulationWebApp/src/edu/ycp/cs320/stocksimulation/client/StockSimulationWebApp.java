@@ -88,8 +88,8 @@ public class StockSimulationWebApp implements EntryPoint {
 		closeButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				dialogBox.hide();
-				sendButton.setEnabled(true);
-				sendButton.setFocus(true);
+				//sendButton.setEnabled(true);
+				//sendButton.setFocus(true);
 			}
 		});
 

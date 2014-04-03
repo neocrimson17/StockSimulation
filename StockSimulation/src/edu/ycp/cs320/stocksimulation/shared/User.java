@@ -47,29 +47,55 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.IOException;
-
+/**
+ * This is a user class
+ * @author hdao2
+ *
+ */
 public class User {
 	public void login() {
-	   
-		File fileName = new File("loginInfo.text");
-		Scanner scan = null;
-		try {
-			scan = new Scanner (new File("loginInfo.text"));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    Scanner keyboard = new Scanner (System.in);
-	    String user = scan.nextLine();
-	    String pass = scan.nextLine(); // looks at selected file in scan
-
-	    String inputUser = keyboard.nextLine();
-	    String inputPass = keyboard.nextLine(); // gets input from user
-
-	    if (inputUser.equals(user) && inputPass.equals(pass)) {
-	        System.out.print("login successful!");
-	    } else {
-	        System.out.print("incorrect password or username!");
+	    
+		Scanner keyboard = new Scanner (System.in);
+	    System.out.println("Enter 1 to login or 2 to register.");
+	    int option = 0;
+	    boolean error = false;
+	    // loop again if user doesn't enter correct value
+	    while(!error){
+	    	if(keyboard.hasNextInt()){
+	    		option = keyboard.nextInt();
+	    	}
+	    	if (option == 1 || option == 2){
+	    		error = true;
+	    	}else{
+	    		System.out.println("You must enter either 1 (integer) to login or 2 (integer) to register an account");
+	    	}
+	    
 	    }
+	    
+	  
+	    if (option == 1){
+	    	// login
+	    	String username = "";
+	 	    String password = "";
+	    	System.out.println("Enter username: ");
+	    	username = keyboard.next();
+	    	System.out.println("Enter password: ");
+	    	password = keyboard.next();
+	    	//TODO  //GetLogin controller = new GetLogin(); need to figure out how to use
+	    	/// the class in the StockSimulationControllers packet
+	    	
+	    	boolean loginCheck = false;
+	    	
+	    	
+	    	while(!loginCheck){
+	    		if (keyboard.hasNext()){
+	    			username = keyboard.next();
+	    		}
+	    	}
+	    }else if (option == 2){
+	    	// register account
+	    }
+	    
+	    
 	}
 }

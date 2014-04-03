@@ -1,5 +1,10 @@
 package edu.ycp.cs320.stocksimulation.shared;
-
+/**
+ * This class is a super class of the BuyStock and SellStock classes
+ * it represents a stock transaction (buy/sell orders)
+ * @author hdao2
+ *
+ */
 public abstract class StockTransaction extends Transaction {
 	// field(s)
 	private Stock stock;
@@ -36,5 +41,6 @@ public abstract class StockTransaction extends Transaction {
 	}
 	
 	// Apply the transaction to the given amount of stock.
-	public abstract Stock stockTransaction(Stock stock);
+	//public abstract Stock stockTransaction(Stock stock);
+	public abstract StockPortfolio stockTransaction(StockPortfolio portfolio);
 }

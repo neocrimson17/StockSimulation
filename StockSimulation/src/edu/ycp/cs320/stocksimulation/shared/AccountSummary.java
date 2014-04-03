@@ -1,4 +1,5 @@
 package edu.ycp.cs320.stocksimulation.shared;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,13 +10,19 @@ import java.util.Map;
  * @author kmusco
  */
 
+=======
+/**
+ * This class represent the account summary which contains all total amount of each type of stock
+ * Note: each type of stock should have a separate total amount (not all stocks have the same(Money) value
+ * @author hdao2
+ *
+ */
+
 public class AccountSummary {
 
 	//fields
 	private Money totalAmountMoney;
-	private Stock totalAmountStock;
-	
-	// TODO: add fields to keep track of what stocks the user owns, and how many
+	private StockPortfolio totalAmountStock;
 	
 	//constructor
 	public AccountSummary(){
@@ -30,10 +37,10 @@ public class AccountSummary {
 		return totalAmountMoney;
 	}
 	
-	public void setAmountStock(Stock totalStock){
+	public void setAmountStock(StockPortfolio totalStock){
 		this.totalAmountStock = totalStock;
 	}
-	public Stock getAmountStock(){
+	public StockPortfolio getAmountStock(){
 		return totalAmountStock;
 	}
 }
