@@ -13,6 +13,8 @@ public class FakeDatabase implements IDatabase {
 	//private List<StockPrice> stockPriceList;
 	private List<StockPrice> googleStockPrices;
 	private List<StockPrice> yahooStockPrices;
+	private List<Login> LoginList;
+	
 	
 	public FakeDatabase() {
 		googleStockPrices = new ArrayList<StockPrice>();
@@ -20,6 +22,10 @@ public class FakeDatabase implements IDatabase {
 		
 		yahooStockPrices = new ArrayList<StockPrice>();
 		// TODO: add data
+		
+		LoginList = new ArrayList<Login>();
+		// Populate initial list with master account
+		LoginList.add(new Login("admin", "admin"));
 	}
 
 	@Override
@@ -38,13 +44,37 @@ public class FakeDatabase implements IDatabase {
 
 	@Override
 	public boolean getLogin(String username, String password) {
-		// TODO Auto-generated method stub
+		//Check for existing login
+		for(Login login : LoginList)
+		{
+			if (login.getName().equals(username)) {
+				if (login.getPassword().equals(password))
+				{
+				//return a copy
+				//return new Login(login.getName(), login.getPassword());
+				return true;
+				}
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public Login postLogin(String username, String password) {
-		// TODO Auto-generated method stub
+		// Add account if it does not exist
+		boolean result = false;
+		//Check to make sure
+		for (Login login: LoginList){
+			if (login.getName().equals(username) && login.getPassword().equals(password)){
+				result = true;
+				break;
+			}
+		}
+		if (result == false){
+			Login newLogin = new Login(username, password);
+			LoginList.add(newLogin);
+			return newLogin;
+		}
 		return null;
 	}
 

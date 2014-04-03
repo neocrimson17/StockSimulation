@@ -12,14 +12,14 @@ public class Homepage implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		controller.setModel(model);
-		
-		OperationAndResultView view = new OperationAndResultView();
-		view.setModel(model);
-		view.setController(controller);
-		
-		RootLayoutPanel.get().add(view);
-		RootLayoutPanel.get().setWidgetLeftWidth(view, 10.0, Unit.PX, 500.0, Unit.PX);
-		RootLayoutPanel.get().setWidgetTopHeight(view, 10.0, Unit.PX, 400.0, Unit.PX);
+//		controller.setModel(model);
+//		
+//		OperationAndResultView view = new OperationAndResultView();
+//		view.setModel(model);
+//		view.setController(controller);
+//		
+//		RootLayoutPanel.get().add(view);
+//		RootLayoutPanel.get().setWidgetLeftWidth(view, 10.0, Unit.PX, 500.0, Unit.PX);
+//		RootLayoutPanel.get().setWidgetTopHeight(view, 10.0, Unit.PX, 400.0, Unit.PX);
 	}
 }

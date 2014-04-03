@@ -8,8 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.ycp.cs320.stocksimulation.server.controllers.GetStockHistory;
-import edu.ycp.cs320.stocksimulation.server.model.persist.DatabaseProvider;
-import edu.ycp.cs320.stocksimulation.server.model.persist.FakeDatabase;
 import edu.ycp.cs320.stocksimulation.shared.Money;
 import edu.ycp.cs320.stocksimulation.shared.Stock;
 import edu.ycp.cs320.stocksimulation.shared.StockHistory;
@@ -21,7 +19,6 @@ public class GetStockHistoryTest {
 
 	@Before
 	public void setUp() {
-		DatabaseProvider.setInstance(new FakeDatabase());
 		google = new Stock();
 		google.setName("Google");
 		google.setSymbol("GOOG");
