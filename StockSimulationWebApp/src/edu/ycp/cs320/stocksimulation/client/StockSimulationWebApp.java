@@ -1,6 +1,12 @@
 package edu.ycp.cs320.stocksimulation.client;
 
+import edu.ycp.cs320.stocksimulation.server.controllers.*;
+import edu.ycp.cs320.stocksimulation.server.model.*;
 import edu.ycp.cs320.stocksimulation.shared.FieldVerifier;
+import edu.ycp.cs320.stocksimulation.shared.IPublisher;
+import edu.ycp.cs320.stocksimulation.shared.ISubscriber;
+import edu.ycp.cs320.stocksimulation.shared.Result;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -23,6 +29,8 @@ import com.google.gwt.user.client.ui.ValueBoxBase.TextAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.PasswordTextBox;
+import com.google.gwt.user.client.ui.Grid;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -32,6 +40,10 @@ public class StockSimulationWebApp implements EntryPoint {
 	 * The message displayed to the user when the server cannot be reached or
 	 * returns an error.
 	 */
+	private Result result;
+	private ResultView resultView;
+	private String userName, passWord;
+	
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network "
 			+ "connection and try again.";
@@ -41,11 +53,16 @@ public class StockSimulationWebApp implements EntryPoint {
 	 */
 	private final GreetingServiceAsync greetingService = GWT
 			.create(GreetingService.class);
+	private Button sendButton;
+
 
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+		this.result = new Result();
+
+		
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
@@ -55,15 +72,72 @@ public class StockSimulationWebApp implements EntryPoint {
 		rootPanel.add(absolutePanel, 0, 10);
 		absolutePanel.setSize("679px", "547px");
 		
-		TextBox txtbxUsername = new TextBox();
-		txtbxUsername.setText("Username");
-		absolutePanel.add(txtbxUsername, 312, 10);
-		txtbxUsername.setSize("115px", "18px");
+
+		this.resultView = new ResultView();
+		absolutePanel.add(resultView, 200, 10);
+		resultView.setModel(result);
+
 		
-		TextBox txtbxPassword = new TextBox();
-		txtbxPassword.setText("Password");
-		absolutePanel.add(txtbxPassword, 443, 10);
-		txtbxPassword.setSize("115px", "18px");
+		// Username entry
+		final TextBox nameField = new TextBox();
+		nameField.setText("Username");
+		absolutePanel.add(nameField, 365, 10);
+		nameField.setSize("88px", "16px");	
+		
+		// Password entry
+		final PasswordTextBox passwordField = new PasswordTextBox();
+		passwordField.setText("Password");
+		absolutePanel.add(passwordField, 469, 10);
+		passwordField.setSize("111px", "16px");
+		
+		/**
+		 * Search Box to search for stocks
+		 */
+		TextBox searchBox = new TextBox();
+		searchBox.setText("Search Box");
+		absolutePanel.add(searchBox, 10, 10);
+		searchBox.setSize("100px", "18px");
+		
+		ScrollPanel scrollPanel = new ScrollPanel();
+		absolutePanel.add(scrollPanel, 10, 50);
+		scrollPanel.setSize("110px", "415px");
+		
+		Label lblStockGrid = new Label("Stock Grid");
+		scrollPanel.setWidget(lblStockGrid);
+		lblStockGrid.setSize("100%", "100%");
+		
+		AbsolutePanel mainPanel = new AbsolutePanel();
+		absolutePanel.add(mainPanel, 126, 42);
+		mainPanel.setSize("543px", "415px");
+		
+		Label lblMainPanel = new Label("Main Panel");
+		mainPanel.add(lblMainPanel, 264, 178);
+		
+		// Login button
+				sendButton = new Button("Login");
+				sendButton.addClickHandler(new ClickHandler() {
+					public void onClick(ClickEvent event) {
+
+						//GetLogin controller = new GetLogin();						//Can't find GetLogin()
+						userName = String.valueOf(nameField.getText());
+						passWord = String.valueOf(passwordField.getText());
+						//if(controller.getLogin( userName , passWord )){
+							result.setValue("Welcome " + userName);
+							System.out.println("\nWelcome " + userName);
+							System.out.println("Password: " + passWord);
+						//} else {
+						//	result.setValue("Invalid Password");
+						//}
+					}
+				});
+				absolutePanel.add(sendButton, 608, 10);
+				
+		/**
+		*  ResultView for user login. Will return "Welcome (user)" if correct,
+		*  "Incorrect password" if incorrect.
+		*/
+		
+		
 
 		// Create the popup dialog box
 		final DialogBox dialogBox = new DialogBox();
@@ -92,6 +166,8 @@ public class StockSimulationWebApp implements EntryPoint {
 				//sendButton.setFocus(true);
 			}
 		});
+		
+		
 
 		// Create a handler for the sendButton and nameField
 		class MyHandler implements ClickHandler, KeyUpHandler {
@@ -99,7 +175,8 @@ public class StockSimulationWebApp implements EntryPoint {
 			 * Fired when the user clicks on the sendButton.
 			 */
 			public void onClick(ClickEvent event) {
-				sendNameToServer();
+				//sendNameToServer();
+				
 			}
 
 			/**
@@ -107,14 +184,14 @@ public class StockSimulationWebApp implements EntryPoint {
 			 */
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-					sendNameToServer();
+					//sendNameToServer();
 				}
 			}
 
 			/**
 			 * Send the name from the nameField to the server and wait for a response.
 			 */
-			private void sendNameToServer() {
+			/*private void sendNameToServer() {
 				// First, we validate the input.
 				errorLabel.setText("");
 				String textToServer = nameField.getText();
@@ -153,6 +230,10 @@ public class StockSimulationWebApp implements EntryPoint {
 		}
 
 		// Add a handler to send the name to the server
-		MyHandler handler = new MyHandler();
+		MyHandler handler = new MyHandler();*/
+		}
+		
+		
 	}
 }
+
