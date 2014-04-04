@@ -1,12 +1,5 @@
 package edu.ycp.cs320.stocksimulation.client;
 
-import edu.ycp.cs320.stocksimulation.server.controllers.*;
-import edu.ycp.cs320.stocksimulation.server.model.*;
-import edu.ycp.cs320.stocksimulation.shared.FieldVerifier;
-import edu.ycp.cs320.stocksimulation.shared.IPublisher;
-import edu.ycp.cs320.stocksimulation.shared.ISubscriber;
-import edu.ycp.cs320.stocksimulation.shared.Result;
-
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -15,22 +8,18 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.DockPanel;
-import com.google.gwt.user.client.ui.DockLayoutPanel;
-import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.user.client.ui.ValueBoxBase.TextAlignment;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.PasswordTextBox;
-import com.google.gwt.user.client.ui.Grid;
+
+import edu.ycp.cs320.stocksimulation.shared.Result;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -66,7 +55,7 @@ public class StockSimulationWebApp implements EntryPoint {
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
-		RootPanel rootPanel = RootPanel.get("nameFieldContainer");
+		RootPanel rootPanel = RootPanel.get();
 		
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		rootPanel.add(absolutePanel, 0, 10);
@@ -118,122 +107,25 @@ public class StockSimulationWebApp implements EntryPoint {
 				sendButton.addClickHandler(new ClickHandler() {
 					public void onClick(ClickEvent event) {
 
-						//GetLogin controller = new GetLogin();						//Can't find GetLogin()
 						userName = String.valueOf(nameField.getText());
 						passWord = String.valueOf(passwordField.getText());
-						//if(controller.getLogin( userName , passWord )){
-							result.setValue("Welcome " + userName);
-							System.out.println("\nWelcome " + userName);
-							System.out.println("Password: " + passWord);
-						//} else {
-						//	result.setValue("Invalid Password");
-						//}
+						RPC.loginService.login(userName, passWord, new AsyncCallback<Boolean>() {
+							@Override
+							public void onSuccess(Boolean r) {
+								if( r )
+									result.setValue("Welcome " + userName );
+								else
+									result.setValue("Invalid username/password");
+							}
+
+							@Override
+							public void onFailure(Throwable caught) {
+								result.setValue("RPC Error!");
+							}
+						});
 					}
 				});
 				absolutePanel.add(sendButton, 608, 10);
-				
-		/**
-		*  ResultView for user login. Will return "Welcome (user)" if correct,
-		*  "Incorrect password" if incorrect.
-		*/
-		
-		
-
-		// Create the popup dialog box
-		final DialogBox dialogBox = new DialogBox();
-		dialogBox.setText("Remote Procedure Call");
-		dialogBox.setAnimationEnabled(true);
-		final Button closeButton = new Button("Close");
-		// We can set the id of a widget by accessing its Element
-		closeButton.getElement().setId("closeButton");
-		final Label textToServerLabel = new Label();
-		final HTML serverResponseLabel = new HTML();
-		VerticalPanel dialogVPanel = new VerticalPanel();
-		dialogVPanel.addStyleName("dialogVPanel");
-		dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
-		dialogVPanel.add(textToServerLabel);
-		dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
-		dialogVPanel.add(serverResponseLabel);
-		dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-		dialogVPanel.add(closeButton);
-		dialogBox.setWidget(dialogVPanel);
-
-		// Add a handler to close the DialogBox
-		closeButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				dialogBox.hide();
-				//sendButton.setEnabled(true);
-				//sendButton.setFocus(true);
-			}
-		});
-		
-		
-
-		// Create a handler for the sendButton and nameField
-		class MyHandler implements ClickHandler, KeyUpHandler {
-			/**
-			 * Fired when the user clicks on the sendButton.
-			 */
-			public void onClick(ClickEvent event) {
-				//sendNameToServer();
-				
-			}
-
-			/**
-			 * Fired when the user types in the nameField.
-			 */
-			public void onKeyUp(KeyUpEvent event) {
-				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-					//sendNameToServer();
-				}
-			}
-
-			/**
-			 * Send the name from the nameField to the server and wait for a response.
-			 */
-			/*private void sendNameToServer() {
-				// First, we validate the input.
-				errorLabel.setText("");
-				String textToServer = nameField.getText();
-				if (!FieldVerifier.isValidName(textToServer)) {
-					errorLabel.setText("Please enter at least four characters");
-					return;
-				}
-
-				// Then, we send the input to the server.
-				sendButton.setEnabled(false);
-				textToServerLabel.setText(textToServer);
-				serverResponseLabel.setText("");
-				greetingService.greetServer(textToServer,
-						new AsyncCallback<String>() {
-							public void onFailure(Throwable caught) {
-								// Show the RPC error message to the user
-								dialogBox
-										.setText("Remote Procedure Call - Failure");
-								serverResponseLabel
-										.addStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(SERVER_ERROR);
-								dialogBox.center();
-								closeButton.setFocus(true);
-							}
-
-							public void onSuccess(String result) {
-								dialogBox.setText("Remote Procedure Call");
-								serverResponseLabel
-										.removeStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(result);
-								dialogBox.center();
-								closeButton.setFocus(true);
-							}
-						});
-			}
-		}
-
-		// Add a handler to send the name to the server
-		MyHandler handler = new MyHandler();*/
-		}
-		
-		
 	}
 }
 
