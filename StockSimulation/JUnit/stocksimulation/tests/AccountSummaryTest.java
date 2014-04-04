@@ -39,7 +39,7 @@ public class AccountSummaryTest {
 		StockPortfolio googleTransaction = new StockPortfolio();
 		googleTransaction.addShares( google, 123 );
 		
-		test.setAmountStock( google );
+		//test.setAmountStock( google );
 		
 		assertEquals("Account Summary: Could not set Account Shares", 123, test.getAmountStock());
 		
