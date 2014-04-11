@@ -1,0 +1,2 @@
+serviceClass: edu.ycp.cs320.stocksimulation.client.LoginService
+path: C38DF2F4219F05EB2264775520B1C015.gwt.rpc
