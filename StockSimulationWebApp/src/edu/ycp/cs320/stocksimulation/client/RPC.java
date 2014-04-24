@@ -6,4 +6,7 @@ public class RPC {
 	public static final LoginServiceAsync loginService =
 			GWT.create(LoginService.class);
 	
+	public static final SearchServiceAsync searchService = 
+			GWT.create(SearchService.class);
+	
 }

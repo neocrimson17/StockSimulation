@@ -5,7 +5,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import edu.ycp.cs320.stocksimulation.shared.Search;
 
-@RemoteServiceRelativePath("login")
+@RemoteServiceRelativePath("search")
 public interface SearchService extends RemoteService {
-	public Search search(String symbol);
+	public boolean search(String symbol);
 }

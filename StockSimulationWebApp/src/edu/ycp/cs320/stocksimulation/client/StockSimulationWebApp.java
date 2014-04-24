@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.ycp.cs320.stocksimulation.shared.Result;
+import edu.ycp.cs320.stocksimulation.shared.Search;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -138,31 +139,26 @@ public class StockSimulationWebApp implements EntryPoint {
 				Button btnSearch = new Button("Search");
 				btnSearch.addClickHandler(new ClickHandler() {
 					public void onClick(ClickEvent event) {
-						URL url;
-						String symbol = String.valueOf(searchBox.getText());
-						try {
-							
-							String baseUrl = "http://download.finance.yahoo.com/d/quotes.csv?s=%40%5EDJI," + symbol + "&f=nsl1op&e=.csv";
-						
-							url = new URL(baseUrl);
-							URLConnection conn = url.openConnection();
-						
-							BufferedReader br = new BufferedReader( new InputStreamReader(conn.getInputStream()));
-					
-							String inputLine;
-							while( (inputLine = br.readLine()) != null ) {
-								System.out.println( inputLine );
+						search = String.valueOf(searchBox.getText());
+						RPC.searchService.search(search, new AsyncCallback<Boolean>(){
+
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+								result.setValue("RPC Error!");
+								
 							}
-						
-							br.close();
-						
-							System.out.println("Done");
-						} catch ( MalformedURLException e) {
-							e.printStackTrace();
-						} catch ( IOException e ) {
-							e.printStackTrace();
-						}
-					
+
+							@Override
+							public void onSuccess(Boolean r) {
+								if(r)
+									result.setValue("Search success");
+								else
+									result.setValue("Search fail");
+								
+							}
+							
+						});
 					}
 				});
 				absolutePanel.add(btnSearch, 126, 10);

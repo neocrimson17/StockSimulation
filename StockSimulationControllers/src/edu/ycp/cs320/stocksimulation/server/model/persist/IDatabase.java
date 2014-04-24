@@ -12,5 +12,5 @@ public interface IDatabase {
 	
 	public Login postLogin(String username, String password);
 	
-	public Search search( String symbol );
+	public boolean search( String symbol );
 }

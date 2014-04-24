@@ -1,6 +1,11 @@
 package edu.ycp.cs320.stocksimulation.server.model.persist;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -21,19 +26,19 @@ import edu.ycp.cs320.stocksimulation.shared.StockPrice;
 
 public class FakeDatabase implements IDatabase {
 	
-	//private List<StockPrice> stockPriceList;
+	private List<StockPrice> stockPriceList;
 	private List<StockPrice> googleStockPrices;
 	private List<StockPrice> yahooStockPrices;
 	private List<Login> LoginList;
 	
 	
+	
 	public FakeDatabase() {
 		googleStockPrices = new ArrayList<StockPrice>();
-		// TODO: add data
-		addStockPrices("edu/ycp/cs320/stocksimulation/server/model/persist/res/googlePrices.csv", googleStockPrices);
-		
 		yahooStockPrices = new ArrayList<StockPrice>();
-		// TODO: add data
+		
+		addStockPrices("edu/ycp/cs320/stocksimulation/server/model/persist/res/googlePrices.csv", googleStockPrices);
+		addStockPrices("edu/ycp/cs320/stocksimulation/server/model/persist/res/yahooPrices.csv", yahooStockPrices);
 		
 		LoginList = new ArrayList<Login>();
 		// Populate initial list with master account
@@ -70,8 +75,14 @@ public class FakeDatabase implements IDatabase {
 	@Override
 	public StockHistory getStockPricesForStock(Stock stock, long beginTimestamp, long endTimestamp) {
 		if (stock.getSymbol().equals("GOOG")) {
-			// return StockHistory for Google within given range
-			throw new UnsupportedOperationException("TODO - implement");
+			
+			StockHistory stockHistory = new StockHistory();
+			stockHistory.sortByTimestamp();
+			stockHistory.getStockPrice( beginTimestamp );
+			stockHistory.getStockPrice( endTimestamp );
+			
+			return stockHistory;
+			
 		} else if (stock.getSymbol().equals("YHOO")) {
 			// return StockHistory for Yahoo within given range
 			throw new UnsupportedOperationException("TODO - implement");
@@ -118,39 +129,13 @@ public class FakeDatabase implements IDatabase {
 	}
 	
 	@Override
-	public Search search( String symbol ){
-		
-		URL url;
-		
-		try {
-			
-			String baseUrl = "http://download.finance.yahoo.com/d/quotes.csv?s=%40%5EDJI," + symbol + "&f=nsl1op&e=.csv";
-		
-			url = new URL(baseUrl);
-			URLConnection conn = url.openConnection();
-		
-			BufferedReader br = new BufferedReader( new InputStreamReader(conn.getInputStream()));
+	// Used to contain code to grab data from Yahoo API. 
+	// Moved code to seperate program on request from Dr.Hovemeyer
 	
-			String inputLine;
-			while( (inputLine = br.readLine()) != null ) {
-				System.out.println( inputLine );
-			}
+	public boolean search( String symbol ){
 		
-			br.close();
-		
-			System.out.println("Done");
-		} catch ( MalformedURLException e) {
-			e.printStackTrace();
-		} catch ( IOException e ) {
-			e.printStackTrace();
-		}
-		return null;
+		//TODO
+		return true;
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(System.currentTimeMillis());
-		FakeDatabase db = new FakeDatabase();
-		db.search("GOOG");
-	}
-
 }
