@@ -8,6 +8,4 @@ public class GetLogin {
 		IDatabase db = DatabaseProvider.getInstance();
 		return db.getLogin(username, password);
 	}
-	
-	
 }

@@ -6,25 +6,30 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class AccountTest {
-
-	@Test
-	public void testAccount() {
-		Account test = new Account();
-		assertEquals("Account: Failed to create", test, new Account());
-	}
 	
+	/**
+	 * This test cover addTransaction
+	 */
 	@Test
-	public void testAddTransaction() {
+	public void testAdd_Get_Transaction() {
 		Account test = new Account();
+		Transaction txn = new Transaction();
 		// Add transactions
+		test.addTransaction(txn);
 		// get transactions
+		assertEquals(txn, test.getTransactionList().get(0));
 	}
-	
+	/**
+	 * This test cover getTransaction
+	 */
 	@Test
 	public void testGetTransactionList(){
 		Account test = new Account();
-		// add transactions
+		Transaction txn = new Transaction();
+		// Add transactions
+		test.addTransaction(txn);
 		// get transactions
+		assertEquals(txn, test.getTransactionList().get(0));
 		
 	}
 

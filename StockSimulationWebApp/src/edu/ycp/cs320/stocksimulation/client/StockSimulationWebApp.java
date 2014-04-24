@@ -4,20 +4,14 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.ycp.cs320.stocksimulation.shared.Result;
 
@@ -31,7 +25,7 @@ public class StockSimulationWebApp implements EntryPoint {
 	 */
 	private Result result;
 	private ResultView resultView;
-	private String userName, passWord;
+	private String userName, passWord,search;
 	
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network "
@@ -43,6 +37,7 @@ public class StockSimulationWebApp implements EntryPoint {
 	private final GreetingServiceAsync greetingService = GWT
 			.create(GreetingService.class);
 	private Button sendButton;
+	private TextBox searchBox;
 
 
 	/**
@@ -82,7 +77,7 @@ public class StockSimulationWebApp implements EntryPoint {
 		/**
 		 * Search Box to search for stocks
 		 */
-		TextBox searchBox = new TextBox();
+		searchBox = new TextBox();
 		searchBox.setText("Search Box");
 		absolutePanel.add(searchBox, 10, 10);
 		searchBox.setSize("100px", "18px");
@@ -91,12 +86,12 @@ public class StockSimulationWebApp implements EntryPoint {
 		absolutePanel.add(scrollPanel, 10, 50);
 		scrollPanel.setSize("110px", "415px");
 		
-		Label lblStockGrid = new Label("Stock Grid");
+		Label lblStockGrid = new Label("Search Results");
 		scrollPanel.setWidget(lblStockGrid);
 		lblStockGrid.setSize("100%", "100%");
 		
 		AbsolutePanel mainPanel = new AbsolutePanel();
-		absolutePanel.add(mainPanel, 126, 42);
+		absolutePanel.add(mainPanel, 126, 50);
 		mainPanel.setSize("543px", "415px");
 		
 		Label lblMainPanel = new Label("Main Panel");
@@ -126,6 +121,38 @@ public class StockSimulationWebApp implements EntryPoint {
 					}
 				});
 				absolutePanel.add(sendButton, 608, 10);
+				
+				Button btnSearch = new Button("Search");
+				btnSearch.addClickHandler(new ClickHandler() {
+					public void onClick(ClickEvent event) {
+//						URL url;
+//						String symbol = String.valueOf(searchBox.getText());
+//						try {
+//							
+//							String baseUrl = "http://download.finance.yahoo.com/d/quotes.csv?s=%40%5EDJI," + symbol + "&f=nsl1op&e=.csv";
+//						
+//							url = new URL(baseUrl);
+//							URLConnection conn = url.openConnection();
+//						
+//							BufferedReader br = new BufferedReader( new InputStreamReader(conn.getInputStream()));
+//					
+//							String inputLine;
+//							while( (inputLine = br.readLine()) != null ) {
+//								System.out.println( inputLine );
+//							}
+//						
+//							br.close();
+//						
+//							System.out.println("Done");
+//						} catch ( MalformedURLException e) {
+//							e.printStackTrace();
+//						} catch ( IOException e ) {
+//							e.printStackTrace();
+//						}
+					
+					}
+				});
+				absolutePanel.add(btnSearch, 126, 10);
 	}
 }
 

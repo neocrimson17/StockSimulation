@@ -8,11 +8,6 @@ import org.junit.Test;
 
 public class AccountSummaryTest {
 
-	@Test
-	public void testAccountSummary() {
-		AccountSummary test = new AccountSummary();
-		assertEquals("AccountSummary: Failed to create", test, new AccountSummary());
-	}
 
 	@Test
 	public void testSetAmountMoney(){
@@ -37,11 +32,9 @@ public class AccountSummaryTest {
 		google.setSymbol("GOOG");
 		
 		StockPortfolio googleTransaction = new StockPortfolio();
-		googleTransaction.addShares( google, 123 );
-		
-		//test.setAmountStock( google );
-		
-		assertEquals("Account Summary: Could not set Account Shares", 123, test.getAmountStock());
+		googleTransaction.addShares(google, 123);
+		test.setAmountStock(googleTransaction);
+		assertEquals(123, test.getAmountStock().getNumShares(google));
 		
 	}
 	
@@ -56,7 +49,7 @@ public class AccountSummaryTest {
 		
 		StockPortfolio googleTransaction = new StockPortfolio();
 		googleTransaction.addShares( google, 100 );
-		
-		assertEquals("AccountSummary: Could not get Account Shares", 100, test.getAmountStock());
+		test.setAmountStock(googleTransaction);
+		assertEquals(100, test.getAmountStock().getNumShares(google));
 	}
 }

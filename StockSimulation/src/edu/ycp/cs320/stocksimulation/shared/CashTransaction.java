@@ -14,6 +14,10 @@ public abstract class CashTransaction extends Transaction {
 		
 	}
 	
+	public CashTransaction(Money money) {
+		this.money = money;
+	}
+	
 	public void setMoney(Money money) {
 		this.money = money;
 	}

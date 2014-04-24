@@ -20,7 +20,6 @@ public class Stock {
 	List<Long> shares = new ArrayList<Long>(); 
 	// constructor
 	public Stock(){
-		
 	}
 	
 	// Return the list of shares
@@ -56,4 +55,5 @@ public class Stock {
 	public void setStockPrice(int price){
 		this.stockPrice = price;
 	}
+	
 }

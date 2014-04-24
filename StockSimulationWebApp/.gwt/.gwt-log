@@ -941,3 +941,134 @@ Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
       Compiling...
          Compilation completed in 0.29 seconds
       Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2756 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 79 seconds)
+   20% complete (ETR: 47 seconds)
+   30% complete (ETR: 35 seconds)
+   40% complete (ETR: 26 seconds)
+   50% complete (ETR: 20 seconds)
+   60% complete (ETR: 14 seconds)
+   70% complete (ETR: 10 seconds)
+   80% complete (ETR: 6 seconds)
+   90% complete (ETR: 3 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 79.47 seconds
+Validating units:
+   [ERROR] Errors in 'file:/H:/git/StockSimulation/StockSimulation/test/edu/ycp/cs320/stocksimulation/shared/AccountTest.java'
+      [ERROR] Line 27: No source code is available for type org.junit.Assert; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/H:/git/StockSimulation/StockSimulation/test/edu/ycp/cs320/stocksimulation/shared/MoneyTest.java'
+      [ERROR] Line 40: No source code is available for type org.junit.Assert; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/H:/git/StockSimulation/StockSimulation/test/edu/ycp/cs320/stocksimulation/shared/StockPortfolioTest.java'
+      [ERROR] Line 34: No source code is available for type org.junit.Assert; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/H:/git/StockSimulation/StockSimulation/test/edu/ycp/cs320/stocksimulation/shared/StockTest.java'
+      [ERROR] Line 22: No source code is available for type org.junit.Assert; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/H:/git/StockSimulation/StockSimulation/src/edu/ycp/cs320/stocksimulation/shared/User.java'
+      [ERROR] Line 58: No source code is available for type java.util.Scanner; did you forget to inherit a required module?
+      [ERROR] Line 58: System.in cannot be resolved
+   [ERROR] Errors in 'file:/H:/git/StockSimulation/StockSimulationPersistence/junit/edu/ycp/cs320/stocksimulation/shared/model/persist/GetStockHistoryTest.java'
+      [ERROR] Line 35: No source code is available for type edu.ycp.cs320.stocksimulation.server.controllers.GetStockHistory; did you forget to inherit a required module?
+      [ERROR] Line 37: No source code is available for type org.junit.Assert; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/H:/git/StockSimulation/StockSimulationPersistence/junit/edu/ycp/cs320/stocksimulation/shared/model/persist/TestGetLogin.java'
+      [ERROR] Line 15: No source code is available for type edu.ycp.cs320.stocksimulation.server.model.persist.DatabaseProvider; did you forget to inherit a required module?
+      [ERROR] Line 15: No source code is available for type edu.ycp.cs320.stocksimulation.server.model.persist.FakeDatabase; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type edu.ycp.cs320.stocksimulation.server.controllers.GetLogin; did you forget to inherit a required module?
+      [ERROR] Line 23: No source code is available for type org.junit.Assert; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0.23 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2756 units from cache.
+Compiling...
+   0% complete (ETR: 91 seconds)
+   10% complete (ETR: 69 seconds)
+   20% complete (ETR: 48 seconds)
+   30% complete (ETR: 36 seconds)
+   40% complete (ETR: 26 seconds)
+   50% complete (ETR: 20 seconds)
+   60% complete (ETR: 14 seconds)
+   70% complete (ETR: 10 seconds)
+   80% complete (ETR: 6 seconds)
+   90% complete (ETR: 3 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 76.92 seconds
+Validating units:
+   [ERROR] Errors in 'file:/H:/git/StockSimulation/StockSimulation/test/edu/ycp/cs320/stocksimulation/shared/AccountTest.java'
+      [ERROR] Line 27: No source code is available for type org.junit.Assert; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/H:/git/StockSimulation/StockSimulation/test/edu/ycp/cs320/stocksimulation/shared/MoneyTest.java'
+      [ERROR] Line 40: No source code is available for type org.junit.Assert; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/H:/git/StockSimulation/StockSimulation/src/edu/ycp/cs320/stocksimulation/shared/Search.java'
+      [ERROR] Line 12: No source code is available for type java.net.URL; did you forget to inherit a required module?
+      [ERROR] Line 21: No source code is available for type java.net.URLConnection; did you forget to inherit a required module?
+      [ERROR] Line 23: No source code is available for type java.io.BufferedReader; did you forget to inherit a required module?
+      [ERROR] Line 23: No source code is available for type java.io.InputStreamReader; did you forget to inherit a required module?
+      [ERROR] Line 33: No source code is available for type java.net.MalformedURLException; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/H:/git/StockSimulation/StockSimulation/test/edu/ycp/cs320/stocksimulation/shared/StockPortfolioTest.java'
+      [ERROR] Line 34: No source code is available for type org.junit.Assert; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/H:/git/StockSimulation/StockSimulation/test/edu/ycp/cs320/stocksimulation/shared/StockTest.java'
+      [ERROR] Line 22: No source code is available for type org.junit.Assert; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/H:/git/StockSimulation/StockSimulationPersistence/junit/edu/ycp/cs320/stocksimulation/shared/model/persist/GetStockHistoryTest.java'
+      [ERROR] Line 35: No source code is available for type edu.ycp.cs320.stocksimulation.server.controllers.GetStockHistory; did you forget to inherit a required module?
+      [ERROR] Line 37: No source code is available for type org.junit.Assert; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/H:/git/StockSimulation/StockSimulationPersistence/junit/edu/ycp/cs320/stocksimulation/shared/model/persist/TestGetLogin.java'
+      [ERROR] Line 15: No source code is available for type edu.ycp.cs320.stocksimulation.server.model.persist.DatabaseProvider; did you forget to inherit a required module?
+      [ERROR] Line 15: No source code is available for type edu.ycp.cs320.stocksimulation.server.model.persist.FakeDatabase; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type edu.ycp.cs320.stocksimulation.server.controllers.GetLogin; did you forget to inherit a required module?
+      [ERROR] Line 23: No source code is available for type org.junit.Assert; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0.21 seconds
+      Removing invalidated units
