@@ -11,7 +11,6 @@ import java.util.List;
 public class Stock {
 	
 	// fields
-	private Integer stockPrice;
 	private String stockName;
 	private String tickerSymbol;
 	
@@ -44,16 +43,6 @@ public class Stock {
 	// get the ticker symbol for the stock
 	public String getSymbol(){
 		return tickerSymbol;
-	}
-	
-	// method to get a stock price
-	public int getStockPrice(){
-		return stockPrice;
-	}
-	
-	// method to set the price of stock
-	public void setStockPrice(int price){
-		this.stockPrice = price;
 	}
 	
 }

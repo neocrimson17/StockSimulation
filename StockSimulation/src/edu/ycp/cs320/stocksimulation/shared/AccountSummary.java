@@ -7,7 +7,7 @@ package edu.ycp.cs320.stocksimulation.shared;
  */
 
 /**
- * This class represent the account summary which contains all total amount of each type of stock
+ * This class represents the account summary which contains all total amount of each type of stock
  * Note: each type of stock should have a separate total amount (not all stocks have the same(Money) value
  * @author hdao2
  *

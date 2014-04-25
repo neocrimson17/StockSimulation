@@ -28,7 +28,7 @@ public class AccountSummaryCalculator {
 					
 					StockTransaction stockTxn = (StockTransaction) txn;
 					// ...update stockPortfolio...
-					stockPortfolio = stockTxn.stockTransaction(stockPortfolio);
+					stockTxn.stockTransaction(stockPortfolio);
 				
 				}
 			}

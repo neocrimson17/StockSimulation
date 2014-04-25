@@ -15,8 +15,9 @@ public abstract class StockTransaction extends Transaction {
 	public StockTransaction(){
 		
 	}
-	public StockTransaction(int numShare){
+	public StockTransaction(int numShare, Stock stock){
 		this.numShare = numShare;
+		this.stock = stock;
 	}
 	public void setStock(Stock stock){
 		this.stock = stock;
@@ -44,5 +45,5 @@ public abstract class StockTransaction extends Transaction {
 	
 	// Apply the transaction to the given amount of stock.
 	//public abstract Stock stockTransaction(Stock stock);
-	public abstract StockPortfolio stockTransaction(StockPortfolio portfolio);
+	public abstract void stockTransaction(StockPortfolio portfolio);
 }
