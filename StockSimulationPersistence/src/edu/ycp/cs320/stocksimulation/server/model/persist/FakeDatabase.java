@@ -17,12 +17,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import edu.ycp.cs320.stocksimulation.shared.AccountSummary;
+import edu.ycp.cs320.stocksimulation.shared.CashTransaction;
+import edu.ycp.cs320.stocksimulation.shared.Deposit;
 import edu.ycp.cs320.stocksimulation.shared.Login;
 import edu.ycp.cs320.stocksimulation.shared.Money;
 import edu.ycp.cs320.stocksimulation.shared.Search;
 import edu.ycp.cs320.stocksimulation.shared.Stock;
 import edu.ycp.cs320.stocksimulation.shared.StockHistory;
 import edu.ycp.cs320.stocksimulation.shared.StockPrice;
+import edu.ycp.cs320.stocksimulation.shared.Transaction;
+import edu.ycp.cs320.stocksimulation.shared.Withdrawal;
 
 public class FakeDatabase implements IDatabase {
 	
@@ -30,6 +35,7 @@ public class FakeDatabase implements IDatabase {
 	private List<StockPrice> googleStockPrices;
 	private List<StockPrice> yahooStockPrices;
 	private List<Login> LoginList;
+	private AccountSummary accountSummary;
 	
 	
 	
@@ -136,6 +142,71 @@ public class FakeDatabase implements IDatabase {
 		
 		//TODO
 		return true;
+	}
+	
+	@Override
+	public boolean cashDeposit( String username, int ammount ){
+		
+		
+		// Link account 
+		Boolean valid = false;
+		Deposit deposit = new Deposit();
+		Transaction transaction = new Transaction();
+		int id = 1234;
+		
+		// Checks that username is valid
+		for(Login login : LoginList)
+		{
+			if (login.getName().equals(username)) {
+					valid = true;
+			}
+		}
+		
+		//Deposit
+		if( valid == true) // Only deposit if the username is valid
+		{
+			BigDecimal val = new BigDecimal( ammount );
+			Money money = new Money(val);
+		
+			transaction.setTransaction( id , System.currentTimeMillis() );
+			deposit.moneyTransaction( money );
+			accountSummary.setAmountMoney( money );
+		}
+		
+		
+		return valid;
+			
+	}
+	
+	@Override
+	public boolean cashWithdrawal( String username, int ammount ){
+		
+		Boolean valid = false;
+		Withdrawal withdrawal = new Withdrawal();
+		Transaction transaction = new Transaction();
+		int id = 4321;
+		
+		// Checks that username is valid
+		for(Login login : LoginList)
+		{
+			if (login.getName().equals(username)) {
+					valid = true;
+			}
+		}
+		
+		//Withdrawal
+		if( valid == true) // Only withdraw if the username is valid
+		{
+			BigDecimal val = new BigDecimal( ammount );
+			Money money = new Money(val);
+		
+			transaction.setTransaction( id , System.currentTimeMillis() );
+			withdrawal.moneyTransaction( money );
+			accountSummary.setAmountMoney( money );
+		}
+		
+		
+		return valid;
 	}
 	
 }

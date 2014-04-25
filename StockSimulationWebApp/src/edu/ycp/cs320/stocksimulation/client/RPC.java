@@ -9,4 +9,7 @@ public class RPC {
 	public static final SearchServiceAsync searchService = 
 			GWT.create(SearchService.class);
 	
+	public static final CashServiceAsync cashService =
+			GWT.create(CashService.class);
+
 }

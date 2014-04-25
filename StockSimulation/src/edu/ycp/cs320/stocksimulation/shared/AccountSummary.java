@@ -1,5 +1,7 @@
 package edu.ycp.cs320.stocksimulation.shared;
 
+import java.math.BigDecimal;
+
 /**
  * Represents the Account Summary.
  * 
@@ -22,6 +24,9 @@ public class AccountSummary {
 	//constructor
 	public AccountSummary(){
 		
+		Money money = new Money( new BigDecimal("0"));
+		
+		totalAmountMoney = money;
 	}
 	
 	public void setAmountMoney(Money totalMoney){
