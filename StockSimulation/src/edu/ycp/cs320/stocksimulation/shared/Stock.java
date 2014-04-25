@@ -11,15 +11,10 @@ import java.util.List;
 public class Stock {
 	
 	// fields
-
 	private int id;
-	private Integer stockPrice;
 	private String stockName;
 	private String tickerSymbol;
 	
-	// Length of the list determines how many shares there are. Value of entry
-	// determines the price of each share.
-	List<Long> shares = new ArrayList<Long>(); 
 	// constructor
 	public Stock(){
 	}
@@ -30,11 +25,6 @@ public class Stock {
 	
 	public int getId() {
 		return id;
-	}
-	
-	// Return the list of shares
-	public List<Long> getShares(){
-		return shares;
 	}
 	
 	// get the name of the stock

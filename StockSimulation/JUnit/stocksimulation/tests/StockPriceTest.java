@@ -8,9 +8,6 @@ import org.junit.Test;
 
 public class StockPriceTest {
 	
-	private Money price;
-	private long timestamp;
-
 	/**
 	 * test setPrice() method
 	 */
@@ -40,6 +37,20 @@ public class StockPriceTest {
 		test.setPrice(money);
 		
 		assertEquals("Stock Price: Failed to set money", money, test.getPrice());
+	}
+	
+	@Test
+	public void testGetId(){
+		StockPrice price = new StockPrice();
+		price.setStockId(1);
+		assertEquals(1,price.getStockId());	
+	}
+	
+	@Test
+	public void testGetTimeStamp(){
+		StockPrice price = new StockPrice();
+		price.setTimestamp(100);
+		assertEquals((long)100,price.getTimestamp());
 	}
 
 }

@@ -25,7 +25,6 @@ public class AccountSummary {
 	public AccountSummary(){
 		
 		Money money = new Money( new BigDecimal("0"));
-		
 		totalAmountMoney = money;
 	}
 	

@@ -36,5 +36,6 @@ public class CashTransactionTest {
 		dep.setMoney(money); 
 		assertEquals(money, dep.getMoney());
 	}
-
+	
+	
 }

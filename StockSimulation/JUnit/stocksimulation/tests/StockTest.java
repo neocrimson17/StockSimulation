@@ -9,13 +9,30 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class StockTest {
-	/*@Test
-	public void testGetShares(){
-		List<Long> shares = new ArrayList<Long>();
-		shares.add((long)100);
-		Stock stock = new Stock();
-		assertTrue(stock.getShares().contains((long)100));
+	private Stock stock;
+	
+	public StockTest(){
+		stock = new Stock();
+		stock.setId(0);
+		stock.setName("Google");
+		stock.setSymbol("GOOG");
 	}
-	*/
+	
+	@Test
+	public void TestGetID(){
+		assertEquals(0,stock.getId());	
+	}
+	
+	@Test
+	public void TestGetName(){
+		assertEquals("Google",stock.getName());
+	}
+	
+	@Test
+	public void TestGetSymbol(){
+		assertEquals("GOOG",stock.getSymbol());
+	}
+	
+	
 	
 }
