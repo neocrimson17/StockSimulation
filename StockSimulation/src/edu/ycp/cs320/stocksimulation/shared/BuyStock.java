@@ -5,7 +5,10 @@ package edu.ycp.cs320.stocksimulation.shared;
  *
  */
 public class BuyStock extends StockTransaction {
-
+	
+	public BuyStock(int numShare) {
+		super(numShare);
+	}
 	/**
 	 * A method to allow the user to buy stock
 	 */

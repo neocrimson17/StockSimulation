@@ -12,21 +12,29 @@ import edu.ycp.cs320.stocksimulation.shared.Money;
 public class CashTransactionTest {
 	
 	private Money money;
-	private CashTransaction cashTransaction;
+	private Deposit dep;
+	
+	public CashTransactionTest(){
+		money = new Money(new BigDecimal("5000"));
+		dep = new Deposit(money);
+	}
 	
 
 	/**
-	 *  Tests setMoney and getMoney
+	 *  Tests setMoney
 	 */
 	@Test
 	public void testSetMoney() {
-		
-		BigDecimal val = new BigDecimal("5000");
-		money = new Money( val );
-		
-		cashTransaction.setMoney(money); // Causes error
-		
-		assertEquals(new BigDecimal("5000"), cashTransaction.getMoney());
+		dep.setMoney(money); 		
+		assertEquals(money, dep.getMoney());
+	}
+	/**
+	 * Test getMoney
+	 */
+	@Test
+	public void testGetMoney() {
+		dep.setMoney(money); 
+		assertEquals(money, dep.getMoney());
 	}
 
 }

@@ -21,7 +21,6 @@ public class Stock {
 	List<Long> shares = new ArrayList<Long>(); 
 	// constructor
 	public Stock(){
-		
 	}
 	
 	public void setId(int id) {
@@ -65,4 +64,5 @@ public class Stock {
 	public void setStockPrice(int price){
 		this.stockPrice = price;
 	}
+	
 }

@@ -1,30 +1,17 @@
 package edu.ycp.cs320.stocksimulation.client;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.ycp.cs320.stocksimulation.shared.AccountSummary;
 import edu.ycp.cs320.stocksimulation.shared.Result;
@@ -195,6 +182,31 @@ public class StockSimulationWebApp implements EntryPoint {
 							}
 							
 						});
+//						URL url;
+//						String symbol = String.valueOf(searchBox.getText());
+//						try {
+//							
+//							String baseUrl = "http://download.finance.yahoo.com/d/quotes.csv?s=%40%5EDJI," + symbol + "&f=nsl1op&e=.csv";
+//						
+//							url = new URL(baseUrl);
+//							URLConnection conn = url.openConnection();
+//						
+//							BufferedReader br = new BufferedReader( new InputStreamReader(conn.getInputStream()));
+//					
+//							String inputLine;
+//							while( (inputLine = br.readLine()) != null ) {
+//								System.out.println( inputLine );
+//							}
+//						
+//							br.close();
+//						
+//							System.out.println("Done");
+//						} catch ( MalformedURLException e) {
+//							e.printStackTrace();
+//						} catch ( IOException e ) {
+//							e.printStackTrace();
+//						}
+					
 					}
 				});
 				absolutePanel.add(btnSearch, 126, 10);
