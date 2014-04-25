@@ -15,6 +15,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import edu.ycp.cs320.stocksimulation.shared.AccountSummary;
@@ -31,27 +32,39 @@ import edu.ycp.cs320.stocksimulation.shared.Withdrawal;
 
 public class FakeDatabase implements IDatabase {
 	
+	private List<Stock> stockList;
 	private List<StockPrice> stockPriceList;
-	private List<StockPrice> googleStockPrices;
-	private List<StockPrice> yahooStockPrices;
+	//private List<StockPrice> googleStockPrices;
+	//private List<StockPrice> yahooStockPrices;
 	private List<Login> LoginList;
 	private AccountSummary accountSummary;
 	
+	//private Map<String, List<StockPrice>> symbolToStockPriceList;
 	
 	
 	public FakeDatabase() {
-		googleStockPrices = new ArrayList<StockPrice>();
-		yahooStockPrices = new ArrayList<StockPrice>();
+		stockList = new ArrayList<Stock>();
+		Stock google = new Stock();
+		google.setId(1);
+		google.setName("Google, Inc.");
+		google.setSymbol("GOOG");
+		stockList.add(google);
+		// etc. for other stocks
+		//stockList.add(new Stock())
 		
-		addStockPrices("edu/ycp/cs320/stocksimulation/server/model/persist/res/googlePrices.csv", googleStockPrices);
-		addStockPrices("edu/ycp/cs320/stocksimulation/server/model/persist/res/yahooPrices.csv", yahooStockPrices);
+		//googleStockPrices = new ArrayList<StockPrice>();
+		//yahooStockPrices = new ArrayList<StockPrice>();
+		stockPriceList = new ArrayList<StockPrice>();
+		
+		addStockPrices("edu/ycp/cs320/stocksimulation/server/model/persist/res/stockPrices.csv"/*, googleStockPrices*/);
+		//addStockPrices("edu/ycp/cs320/stocksimulation/server/model/persist/res/yahooPrices.csv", yahooStockPrices);
 		
 		LoginList = new ArrayList<Login>();
 		// Populate initial list with master account
 		LoginList.add(new Login("admin", "admin"));
 	}
 
-	private void addStockPrices(String resourceName, List<StockPrice> stockPrices) {
+	private void addStockPrices(String resourceName/*, List<StockPrice> stockPrices*/) {
 		try {
 			InputStream in = this.getClass().getClassLoader().getResourceAsStream(resourceName);
 			if (in == null) {
@@ -65,17 +78,48 @@ public class FakeDatabase implements IDatabase {
 				}
 				StringTokenizer tok = new StringTokenizer(line, ",");
 				while (tok.hasMoreTokens()) {
-					long timestamp = Long.parseLong(tok.nextToken());
-					BigDecimal price = new BigDecimal(tok.nextToken());
+					
+					String symbol = parseToken(tok.nextToken());
+					String companyName = parseToken(tok.nextToken());
+					BigDecimal price = new BigDecimal(parseToken(tok.nextToken()));
+					long timestamp = Long.parseLong(parseToken(tok.nextToken()));
+					
+					//long timestamp = Long.parseLong(tok.nextToken());
+					//BigDecimal price = new BigDecimal(tok.nextToken());
+					
 					StockPrice stockPrice = new StockPrice();
 					stockPrice.setPrice(new Money(price));
 					stockPrice.setTimestamp(timestamp);
-					stockPrices.add(stockPrice);
+					//stockPrices.add(stockPrice);
+					
+					Stock stock = findStockBySymbol(symbol);
+					stockPrice.setStockId(stock.getId());
+					
+					stockPriceList.add(stockPrice);
 				}
 			}
 		} catch (IOException e) {
 			throw new IllegalStateException("Error reading " + resourceName, e);
 		}
+	}
+
+	private Stock findStockBySymbol(String symbol) {
+		for (Stock stock : stockList) {
+			if (stock.getSymbol().equals(symbol)) {
+				return stock;
+			}
+		}
+		throw new IllegalArgumentException("Unknown stock symbol: " + symbol);
+	}
+
+	private String parseToken(String token) {
+		if (token.startsWith("")) {
+			token = token.substring(1);
+		}
+		if (token.endsWith("\"")) {
+			token = token.substring(0, token.length() - 1);
+		}
+		return token;
 	}
 
 	@Override

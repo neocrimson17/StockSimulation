@@ -7,7 +7,6 @@ package edu.ycp.cs320.stocksimulation.shared;
  *
  */
 public abstract class CashTransaction extends Transaction {
-	
 	private Money money;
 	
 	public CashTransaction() {

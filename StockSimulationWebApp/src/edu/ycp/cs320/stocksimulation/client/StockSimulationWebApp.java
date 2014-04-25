@@ -145,7 +145,6 @@ public class StockSimulationWebApp implements EntryPoint {
 		});
 		mainPanel.add(btnWithdraw, 429, 70);
 		
-		fundsResult.setValue( accountSummary.getAmountMoney().getAmount().toString() );
 		
 		
 		// Login button
@@ -208,6 +207,8 @@ public class StockSimulationWebApp implements EntryPoint {
 	// Deposit / Withdraw Funds
 	protected void handleDeposit() {
 			
+		fundsResult.setValue( accountSummary.getAmountMoney().getAmount().toString() );
+		
 			RPC.cashService.cashDeposit( userName, ammount , new AsyncCallback<Boolean>(){
 				
 				@Override
@@ -226,6 +227,8 @@ public class StockSimulationWebApp implements EntryPoint {
 	}
 	
 	protected void handleWithdrawal() {
+		
+		fundsResult.setValue( accountSummary.getAmountMoney().getAmount().toString() );
 		
 		RPC.cashService.cashWithdrawal( userName, ammount, new AsyncCallback<Boolean>(){
 				
