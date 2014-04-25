@@ -1,0 +1,2 @@
+serviceClass: edu.ycp.cs320.stocksimulation.client.SearchService
+path: 3C73475A27FEFFCDE983AE3B567EF8B0.gwt.rpc

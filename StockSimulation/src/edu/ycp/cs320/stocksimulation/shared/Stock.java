@@ -11,6 +11,9 @@ import java.util.List;
 public class Stock {
 	
 	// fields
+
+	private int id;
+	private Integer stockPrice;
 	private String stockName;
 	private String tickerSymbol;
 	
@@ -19,6 +22,14 @@ public class Stock {
 	List<Long> shares = new ArrayList<Long>(); 
 	// constructor
 	public Stock(){
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
 	}
 	
 	// Return the list of shares

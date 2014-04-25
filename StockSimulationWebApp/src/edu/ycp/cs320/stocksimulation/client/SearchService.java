@@ -7,5 +7,5 @@ import edu.ycp.cs320.stocksimulation.shared.Search;
 
 @RemoteServiceRelativePath("search")
 public interface SearchService extends RemoteService {
-	public Search search(String symbol);
+	public boolean search(String symbol);
 }

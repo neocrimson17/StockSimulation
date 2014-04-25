@@ -7,6 +7,6 @@ import edu.ycp.cs320.stocksimulation.shared.Search;
 
 public interface SearchServiceAsync {
 
-	void search(String symbol, AsyncCallback<Search> callback);
+	void search(String symbol, AsyncCallback<Boolean> asyncCallback);
 
 }

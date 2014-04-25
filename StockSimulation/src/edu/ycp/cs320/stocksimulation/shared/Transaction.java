@@ -4,6 +4,7 @@ public class Transaction {
 	// field(s)
 	private int id;
 	private long timestamp;
+	private int accountId;
 	
 	// constructor
 	public Transaction(){
@@ -36,5 +37,13 @@ public class Transaction {
 		this.timestamp = timestamp;
 	}
 	
+	
+	public void setAccountId(int accountId) {
+		this.accountId = accountId;
+	}
+	
+	public int getAccountId() {
+		return accountId;
+	}
 	
 }

@@ -13,7 +13,12 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 
+import edu.ycp.cs320.stocksimulation.shared.AccountSummary;
 import edu.ycp.cs320.stocksimulation.shared.Result;
+import edu.ycp.cs320.stocksimulation.shared.Search;
+
+import com.google.gwt.user.client.ui.TabPanel;
+import com.google.gwt.user.client.ui.DecoratedTabPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -24,8 +29,12 @@ public class StockSimulationWebApp implements EntryPoint {
 	 * returns an error.
 	 */
 	private Result result;
+	private Result fundsResult;
 	private ResultView resultView;
+	private ResultView fundsResultView;
 	private String userName, passWord,search;
+	private int ammount;
+	private AccountSummary accountSummary = new AccountSummary();
 	
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network "
@@ -45,6 +54,7 @@ public class StockSimulationWebApp implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		this.result = new Result();
+		this.fundsResult = new Result();
 
 		
 
@@ -58,8 +68,12 @@ public class StockSimulationWebApp implements EntryPoint {
 		
 
 		this.resultView = new ResultView();
+		this.fundsResultView = new ResultView();
 		absolutePanel.add(resultView, 200, 10);
+		absolutePanel.add(fundsResultView, 570, 60 );
 		resultView.setModel(result);
+		fundsResultView.setModel( fundsResult );
+		
 
 		
 		// Username entry
@@ -86,6 +100,7 @@ public class StockSimulationWebApp implements EntryPoint {
 		absolutePanel.add(scrollPanel, 10, 50);
 		scrollPanel.setSize("110px", "415px");
 		
+		// Search results grid
 		Label lblStockGrid = new Label("Search Results");
 		scrollPanel.setWidget(lblStockGrid);
 		lblStockGrid.setSize("100%", "100%");
@@ -94,8 +109,30 @@ public class StockSimulationWebApp implements EntryPoint {
 		absolutePanel.add(mainPanel, 126, 50);
 		mainPanel.setSize("543px", "415px");
 		
-		Label lblMainPanel = new Label("Main Panel");
-		mainPanel.add(lblMainPanel, 264, 178);
+		Label lblAccountFunds = new Label("Account funds: ");
+		mainPanel.add(lblAccountFunds, 348, 10);
+		
+		TextBox fundsTextBox = new TextBox();
+		mainPanel.add(fundsTextBox, 348, 34);
+		fundsTextBox.setSize("140px", "18px");
+		
+		Button btnAddFunds = new Button("Deposit");
+		btnAddFunds.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				handleDeposit();
+			}
+		});
+		mainPanel.add(btnAddFunds, 348, 70);
+		
+		Button btnWithdraw = new Button("Withdraw");
+		btnWithdraw.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				handleWithdrawal();
+			}
+		});
+		mainPanel.add(btnWithdraw, 429, 70);
+		
+		
 		
 		// Login button
 				sendButton = new Button("Login");
@@ -107,9 +144,9 @@ public class StockSimulationWebApp implements EntryPoint {
 						RPC.loginService.login(userName, passWord, new AsyncCallback<Boolean>() {
 							@Override
 							public void onSuccess(Boolean r) {
-								if( r )
+								if( r ) {
 									result.setValue("Welcome " + userName );
-								else
+								}else
 									result.setValue("Invalid username/password");
 							}
 
@@ -125,6 +162,26 @@ public class StockSimulationWebApp implements EntryPoint {
 				Button btnSearch = new Button("Search");
 				btnSearch.addClickHandler(new ClickHandler() {
 					public void onClick(ClickEvent event) {
+						search = String.valueOf(searchBox.getText());
+						RPC.searchService.search(search, new AsyncCallback<Boolean>(){
+
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+								result.setValue("RPC Error!");
+								
+							}
+
+							@Override
+							public void onSuccess(Boolean r) {
+								if(r)
+									result.setValue("Search success");
+								else
+									result.setValue("Search fail");
+								
+							}
+							
+						});
 //						URL url;
 //						String symbol = String.valueOf(searchBox.getText());
 //						try {
@@ -153,6 +210,53 @@ public class StockSimulationWebApp implements EntryPoint {
 					}
 				});
 				absolutePanel.add(btnSearch, 126, 10);
+				
+			
+		
+		
+	}
+	
+	// Deposit / Withdraw Funds
+	protected void handleDeposit() {
+			
+		fundsResult.setValue( accountSummary.getAmountMoney().getAmount().toString() );
+		
+			RPC.cashService.cashDeposit( userName, ammount , new AsyncCallback<Boolean>(){
+				
+				@Override
+				public void onSuccess( Boolean r ) {
+					if( r )
+						result.setValue("Deposit successful!");
+					else
+						result.setValue("Deposit unsuccesful!");
+				}
+				
+				@Override
+				public void onFailure( Throwable caught ) {
+					result.setValue("RPC Error!");
+				}
+			});
+	}
+	
+	protected void handleWithdrawal() {
+		
+		fundsResult.setValue( accountSummary.getAmountMoney().getAmount().toString() );
+		
+		RPC.cashService.cashWithdrawal( userName, ammount, new AsyncCallback<Boolean>(){
+				
+				@Override
+				public void onSuccess( Boolean r ) {
+					if( r )
+						result.setValue("Withdrawal successful!");
+					else
+						result.setValue("Withdrawal unsuccesful!");
+				}
+				
+				@Override
+				public void onFailure( Throwable caught ) {
+					result.setValue("RPC Error!");
+				}
+			});
 	}
 }
 

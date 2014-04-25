@@ -1,6 +1,11 @@
 package edu.ycp.cs320.stocksimulation.server.model.persist;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,37 +15,56 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
+import edu.ycp.cs320.stocksimulation.shared.AccountSummary;
+import edu.ycp.cs320.stocksimulation.shared.CashTransaction;
+import edu.ycp.cs320.stocksimulation.shared.Deposit;
 import edu.ycp.cs320.stocksimulation.shared.Login;
 import edu.ycp.cs320.stocksimulation.shared.Money;
 import edu.ycp.cs320.stocksimulation.shared.Search;
 import edu.ycp.cs320.stocksimulation.shared.Stock;
 import edu.ycp.cs320.stocksimulation.shared.StockHistory;
 import edu.ycp.cs320.stocksimulation.shared.StockPrice;
+import edu.ycp.cs320.stocksimulation.shared.Transaction;
+import edu.ycp.cs320.stocksimulation.shared.Withdrawal;
 
 public class FakeDatabase implements IDatabase {
 	
-	//private List<StockPrice> stockPriceList;
-	private List<StockPrice> googleStockPrices;
-	private List<StockPrice> yahooStockPrices;
+	private List<Stock> stockList;
+	private List<StockPrice> stockPriceList;
+	//private List<StockPrice> googleStockPrices;
+	//private List<StockPrice> yahooStockPrices;
 	private List<Login> LoginList;
+	private AccountSummary accountSummary;
+	
+	//private Map<String, List<StockPrice>> symbolToStockPriceList;
 	
 	
 	public FakeDatabase() {
-		googleStockPrices = new ArrayList<StockPrice>();
-		// TODO: add data
-		addStockPrices("edu/ycp/cs320/stocksimulation/server/model/persist/res/googlePrices.csv", googleStockPrices);
+		stockList = new ArrayList<Stock>();
+		Stock google = new Stock();
+		google.setId(1);
+		google.setName("Google, Inc.");
+		google.setSymbol("GOOG");
+		stockList.add(google);
+		// etc. for other stocks
+		//stockList.add(new Stock())
 		
-		yahooStockPrices = new ArrayList<StockPrice>();
-		// TODO: add data
+		//googleStockPrices = new ArrayList<StockPrice>();
+		//yahooStockPrices = new ArrayList<StockPrice>();
+		stockPriceList = new ArrayList<StockPrice>();
+		
+		addStockPrices("edu/ycp/cs320/stocksimulation/server/model/persist/res/stockPrices.csv"/*, googleStockPrices*/);
+		//addStockPrices("edu/ycp/cs320/stocksimulation/server/model/persist/res/yahooPrices.csv", yahooStockPrices);
 		
 		LoginList = new ArrayList<Login>();
 		// Populate initial list with master account
 		LoginList.add(new Login("admin", "admin"));
 	}
 
-	private void addStockPrices(String resourceName, List<StockPrice> stockPrices) {
+	private void addStockPrices(String resourceName/*, List<StockPrice> stockPrices*/) {
 		try {
 			InputStream in = this.getClass().getClassLoader().getResourceAsStream(resourceName);
 			if (in == null) {
@@ -54,12 +78,24 @@ public class FakeDatabase implements IDatabase {
 				}
 				StringTokenizer tok = new StringTokenizer(line, ",");
 				while (tok.hasMoreTokens()) {
-					long timestamp = Long.parseLong(tok.nextToken());
-					BigDecimal price = new BigDecimal(tok.nextToken());
+					
+					String symbol = parseToken(tok.nextToken());
+					String companyName = parseToken(tok.nextToken());
+					BigDecimal price = new BigDecimal(parseToken(tok.nextToken()));
+					long timestamp = Long.parseLong(parseToken(tok.nextToken()));
+					
+					//long timestamp = Long.parseLong(tok.nextToken());
+					//BigDecimal price = new BigDecimal(tok.nextToken());
+					
 					StockPrice stockPrice = new StockPrice();
 					stockPrice.setPrice(new Money(price));
 					stockPrice.setTimestamp(timestamp);
-					stockPrices.add(stockPrice);
+					//stockPrices.add(stockPrice);
+					
+					Stock stock = findStockBySymbol(symbol);
+					stockPrice.setStockId(stock.getId());
+					
+					stockPriceList.add(stockPrice);
 				}
 			}
 		} catch (IOException e) {
@@ -67,11 +103,36 @@ public class FakeDatabase implements IDatabase {
 		}
 	}
 
+	private Stock findStockBySymbol(String symbol) {
+		for (Stock stock : stockList) {
+			if (stock.getSymbol().equals(symbol)) {
+				return stock;
+			}
+		}
+		throw new IllegalArgumentException("Unknown stock symbol: " + symbol);
+	}
+
+	private String parseToken(String token) {
+		if (token.startsWith("")) {
+			token = token.substring(1);
+		}
+		if (token.endsWith("\"")) {
+			token = token.substring(0, token.length() - 1);
+		}
+		return token;
+	}
+
 	@Override
 	public StockHistory getStockPricesForStock(Stock stock, long beginTimestamp, long endTimestamp) {
 		if (stock.getSymbol().equals("GOOG")) {
-			// return StockHistory for Google within given range
-			throw new UnsupportedOperationException("TODO - implement");
+			
+			StockHistory stockHistory = new StockHistory();
+			stockHistory.sortByTimestamp();
+			stockHistory.getStockPrice( beginTimestamp );
+			stockHistory.getStockPrice( endTimestamp );
+			
+			return stockHistory;
+			
 		} else if (stock.getSymbol().equals("YHOO")) {
 			// return StockHistory for Yahoo within given range
 			throw new UnsupportedOperationException("TODO - implement");
@@ -118,39 +179,78 @@ public class FakeDatabase implements IDatabase {
 	}
 	
 	@Override
-	public Search search( String symbol ){
-		
-		URL url;
-		
-		try {
-			
-			String baseUrl = "http://download.finance.yahoo.com/d/quotes.csv?s=%40%5EDJI," + symbol + "&f=nsl1op&e=.csv";
-		
-			url = new URL(baseUrl);
-			URLConnection conn = url.openConnection();
-		
-			BufferedReader br = new BufferedReader( new InputStreamReader(conn.getInputStream()));
+	// Used to contain code to grab data from Yahoo API. 
+	// Moved code to seperate program on request from Dr.Hovemeyer
 	
-			String inputLine;
-			while( (inputLine = br.readLine()) != null ) {
-				System.out.println( inputLine );
+	public boolean search( String symbol ){
+		
+		//TODO
+		return true;
+	}
+	
+	@Override
+	public boolean cashDeposit( String username, int ammount ){
+		
+		
+		// Link account 
+		Boolean valid = false;
+		Deposit deposit = new Deposit(null);
+		Transaction transaction = new Transaction();
+		int id = 1234;
+		
+		// Checks that username is valid
+		for(Login login : LoginList)
+		{
+			if (login.getName().equals(username)) {
+					valid = true;
 			}
-		
-			br.close();
-		
-			System.out.println("Done");
-		} catch ( MalformedURLException e) {
-			e.printStackTrace();
-		} catch ( IOException e ) {
-			e.printStackTrace();
 		}
-		return null;
+		
+		//Deposit
+		if( valid == true) // Only deposit if the username is valid
+		{
+			BigDecimal val = new BigDecimal( ammount );
+			Money money = new Money(val);
+		
+			transaction.setTransaction( id , System.currentTimeMillis() );
+			deposit.moneyTransaction( money );
+			accountSummary.setAmountMoney( money );
+		}
+		
+		
+		return valid;
+			
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(System.currentTimeMillis());
-		FakeDatabase db = new FakeDatabase();
-		db.search("GOOG");
+	@Override
+	public boolean cashWithdrawal( String username, int ammount ){
+		
+		Boolean valid = false;
+		Withdrawal withdrawal = new Withdrawal(null);
+		Transaction transaction = new Transaction();
+		int id = 4321;
+		
+		// Checks that username is valid
+		for(Login login : LoginList)
+		{
+			if (login.getName().equals(username)) {
+					valid = true;
+			}
+		}
+		
+		//Withdrawal
+		if( valid == true) // Only withdraw if the username is valid
+		{
+			BigDecimal val = new BigDecimal( ammount );
+			Money money = new Money(val);
+		
+			transaction.setTransaction( id , System.currentTimeMillis() );
+			withdrawal.moneyTransaction( money );
+			accountSummary.setAmountMoney( money );
+		}
+		
+		
+		return valid;
 	}
-
+	
 }
