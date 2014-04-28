@@ -217,13 +217,13 @@ public class FakeDatabase implements IDatabase {
 	}
 	
 	@Override
-	public boolean cashDeposit( String username, int ammount ){
+	public boolean cashDeposit( String username, int amount ){
 		
 		
 		// Link account 
 		Boolean valid = false;
-		Deposit deposit = new Deposit(null);
-		Transaction transaction = new Transaction();
+		Deposit deposit = new Deposit(new Money(new BigDecimal(amount))  );
+		//Transaction transaction = new Transaction();
 		int id = 1234;
 		
 		// Checks that username is valid
@@ -237,10 +237,10 @@ public class FakeDatabase implements IDatabase {
 		//Deposit
 		if( valid == true) // Only deposit if the username is valid
 		{
-			BigDecimal val = new BigDecimal( ammount );
+			BigDecimal val = new BigDecimal( amount );
 			Money money = new Money(val);
 		
-			transaction.setTransaction( id , System.currentTimeMillis() );
+			deposit.setTransaction( id , System.currentTimeMillis() );
 			deposit.moneyTransaction( money );
 			accountSummary.setAmountMoney( money );
 		}
@@ -251,11 +251,11 @@ public class FakeDatabase implements IDatabase {
 	}
 	
 	@Override
-	public boolean cashWithdrawal( String username, int ammount ){
+	public boolean cashWithdrawal( String username, int amount ){
 		
 		Boolean valid = false;
-		Withdrawal withdrawal = new Withdrawal(null);
-		Transaction transaction = new Transaction();
+		Withdrawal withdrawal = new Withdrawal(new Money(new BigDecimal(amount)));
+		//Transaction transaction = new Transaction();
 		int id = 4321;
 		
 		// Checks that username is valid
@@ -269,10 +269,10 @@ public class FakeDatabase implements IDatabase {
 		//Withdrawal
 		if( valid == true) // Only withdraw if the username is valid
 		{
-			BigDecimal val = new BigDecimal( ammount );
+			BigDecimal val = new BigDecimal( amount );
 			Money money = new Money(val);
 		
-			transaction.setTransaction( id , System.currentTimeMillis() );
+			withdrawal.setTransaction( id , System.currentTimeMillis() );
 			withdrawal.moneyTransaction( money );
 			accountSummary.setAmountMoney( money );
 		}

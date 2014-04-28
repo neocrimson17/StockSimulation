@@ -1,5 +1,7 @@
 package stocksimulation.tests;
 
+import java.math.BigDecimal;
+
 import edu.ycp.cs320.stocksimulation.shared.*;
 import static org.junit.Assert.*;
 
@@ -13,11 +15,12 @@ public class AccountTest {
 	@Test
 	public void testAdd_Get_Transaction() {
 		Account test = new Account();
-		Transaction txn = new Transaction();
+		Deposit dep = new Deposit(new Money());
+		dep.moneyTransaction(new Money(new BigDecimal(100)));
 		// Add transactions
-		test.addTransaction(txn);
+		test.addTransaction(dep);
 		// get transactions
-		assertEquals(txn, test.getTransactionList().get(0));
+		assertEquals(dep, test.getTransactionList().get(0));
 	}
 	/**
 	 * This test cover getTransaction
@@ -25,11 +28,12 @@ public class AccountTest {
 	@Test
 	public void testGetTransactionList(){
 		Account test = new Account();
-		Transaction txn = new Transaction();
+		Deposit dep = new Deposit(new Money());
+		dep.moneyTransaction(new Money(new BigDecimal(100)));
 		// Add transactions
-		test.addTransaction(txn);
+		test.addTransaction(dep);
 		// get transactions
-		assertEquals(txn, test.getTransactionList().get(0));
+		assertEquals(dep, test.getTransactionList().get(0));
 		
 	}
 

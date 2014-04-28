@@ -53,7 +53,7 @@ public class StockFetcher {
 				
 				// Copy file from StockFetcher directory into StockSimulationPersistence directory
 				File source = new File("stockPrices.csv");
-				File dest = new File("H://git//StockSimulation//StockSimulationPersistence//bin//edu//ycp//cs320//stocksimulation//server//model//persist//res//stockPrices.csv");
+				File dest = new File("H://CS 320 Software Engineering and Design//StockSimulation//StockSimulationPersistence//bin//edu//ycp//cs320//stocksimulation//server//model//persist//res//stockPrices.csv");
 				copyFile( source, dest );
 				
 	}

@@ -1,6 +1,6 @@
 package edu.ycp.cs320.stocksimulation.shared;
 
-public class Transaction {
+public abstract class Transaction {
 	// field(s)
 	private int id;
 	private long timestamp;

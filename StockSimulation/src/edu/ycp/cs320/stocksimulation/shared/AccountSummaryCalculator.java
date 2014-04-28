@@ -35,7 +35,6 @@ public class AccountSummaryCalculator {
 			
 		}
 		
-		//return null;
 		AccountSummary result = new AccountSummary();
 		result.setAmountMoney(totalCash);
 		
