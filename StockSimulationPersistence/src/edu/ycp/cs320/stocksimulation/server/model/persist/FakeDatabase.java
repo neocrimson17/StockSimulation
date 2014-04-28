@@ -44,16 +44,30 @@ public class FakeDatabase implements IDatabase {
 	
 	public FakeDatabase() {
 		stockList = new ArrayList<Stock>();
+		
+		// Google
 		Stock google = new Stock();
+		
 		google.setId(1);
 		google.setName("Google, Inc.");
 		google.setSymbol("GOOG");
 		stockList.add(google);
-		// etc. for other stocks
-		//stockList.add(new Stock())
 		
-		//googleStockPrices = new ArrayList<StockPrice>();
-		//yahooStockPrices = new ArrayList<StockPrice>();
+		// Yahoo
+		Stock yahoo = new Stock();
+		yahoo.setId(2);
+		yahoo.setName("Yahoo! Inc.");
+		yahoo.setSymbol("YHOO");
+		stockList.add(yahoo);
+		
+		// Intel
+		Stock intel = new Stock();
+		intel.setId(3);
+		intel.setName("INTL FCStone Inc.");
+		intel.setSymbol("INTL");
+		stockList.add(intel);
+		
+		
 		stockPriceList = new ArrayList<StockPrice>();
 		
 		addStockPrices("edu/ycp/cs320/stocksimulation/server/model/persist/res/stockPrices.csv"/*, googleStockPrices*/);
@@ -90,7 +104,6 @@ public class FakeDatabase implements IDatabase {
 					StockPrice stockPrice = new StockPrice();
 					stockPrice.setPrice(new Money(price));
 					stockPrice.setTimestamp(timestamp);
-					//stockPrices.add(stockPrice);
 					
 					Stock stock = findStockBySymbol(symbol);
 					stockPrice.setStockId(stock.getId());
@@ -134,8 +147,23 @@ public class FakeDatabase implements IDatabase {
 			return stockHistory;
 			
 		} else if (stock.getSymbol().equals("YHOO")) {
-			// return StockHistory for Yahoo within given range
-			throw new UnsupportedOperationException("TODO - implement");
+
+			StockHistory stockHistory = new StockHistory();
+			stockHistory.sortByTimestamp();
+			stockHistory.getStockPrice( beginTimestamp );
+			stockHistory.getStockPrice( endTimestamp );
+			
+			return stockHistory;
+			
+		} else if ( stock.getSymbol().equals("INTL")){
+			
+			StockHistory stockHistory = new StockHistory();
+			stockHistory.sortByTimestamp();
+			stockHistory.getStockPrice( beginTimestamp );
+			stockHistory.getStockPrice( endTimestamp );
+			
+			return stockHistory;
+			
 		} else {
 			// No information
 			return new StockHistory();
