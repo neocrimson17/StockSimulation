@@ -1,5 +1,7 @@
 package edu.ycp.cs320.stocksimulation.client;
 
+import java.math.BigDecimal;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -14,6 +16,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 
 import edu.ycp.cs320.stocksimulation.shared.AccountSummary;
+import edu.ycp.cs320.stocksimulation.shared.Money;
 import edu.ycp.cs320.stocksimulation.shared.Result;
 import edu.ycp.cs320.stocksimulation.shared.Search;
 
@@ -34,7 +37,8 @@ public class StockSimulationWebApp implements EntryPoint {
 	private ResultView fundsResultView;
 	private String userName, passWord,search;
 	private int ammount;
-	private AccountSummary accountSummary = new AccountSummary();
+
+	
 	
 	private static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network "
@@ -47,7 +51,8 @@ public class StockSimulationWebApp implements EntryPoint {
 			.create(GreetingService.class);
 	private Button sendButton;
 	private TextBox searchBox;
-
+	private TextBox fundsTextBox;
+	
 
 	/**
 	 * This is the entry point method.
@@ -112,7 +117,7 @@ public class StockSimulationWebApp implements EntryPoint {
 		Label lblAccountFunds = new Label("Account funds: ");
 		mainPanel.add(lblAccountFunds, 348, 10);
 		
-		TextBox fundsTextBox = new TextBox();
+		this.fundsTextBox = new TextBox();
 		mainPanel.add(fundsTextBox, 348, 34);
 		fundsTextBox.setSize("140px", "18px");
 		
@@ -211,52 +216,52 @@ public class StockSimulationWebApp implements EntryPoint {
 				});
 				absolutePanel.add(btnSearch, 126, 10);
 				
-			
-		
-		
+				
+				
 	}
 	
-	// Deposit / Withdraw Funds
+	// add money the user's account
 	protected void handleDeposit() {
-			
-		fundsResult.setValue( accountSummary.getAmountMoney().getAmount().toString() );
 		
-			RPC.cashService.cashDeposit( userName, ammount , new AsyncCallback<Boolean>(){
+		ammount = Integer.parseInt(fundsTextBox.getText());
+		
+		RPC.cashService.cashDeposit( userName, ammount , new AsyncCallback<AccountSummary>(){
+			@Override
+			public void onFailure( Throwable caught ) {
+				fundsResult.setValue("RPC Error!");
+			}
+
+			@Override
+			public void onSuccess(AccountSummary result) {
+				// TODO Auto-generated method stub
+				//result.setAmountMoney(new Money(new BigDecimal(ammount)));
 				
-				@Override
-				public void onSuccess( Boolean r ) {
-					if( r )
-						result.setValue("Deposit successful!");
-					else
-						result.setValue("Deposit unsuccesful!");
-				}
-				
-				@Override
-				public void onFailure( Throwable caught ) {
-					result.setValue("RPC Error!");
-				}
-			});
+				System.out.println("the result value is: "+result.getAmountMoney().getAmount().toString());
+				fundsResult.setValue(result.getAmountMoney().getAmount().toString());
+			}
+		});
+			
+			
 	}
 	
+	// withdraw cash from the user's account
 	protected void handleWithdrawal() {
-		
-		fundsResult.setValue( accountSummary.getAmountMoney().getAmount().toString() );
-		
-		RPC.cashService.cashWithdrawal( userName, ammount, new AsyncCallback<Boolean>(){
+		ammount = Integer.parseInt(fundsTextBox.getText());
+		RPC.cashService.cashWithdrawal( userName, ammount, new AsyncCallback<AccountSummary>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				fundsResult.setValue("RPC Error!");
 				
-				@Override
-				public void onSuccess( Boolean r ) {
-					if( r )
-						result.setValue("Withdrawal successful!");
-					else
-						result.setValue("Withdrawal unsuccesful!");
-				}
+			}
+
+			@Override
+			public void onSuccess(AccountSummary result) {
+				fundsResult.setValue(result.getAmountMoney().getAmount().toString());
+			}
 				
-				@Override
-				public void onFailure( Throwable caught ) {
-					result.setValue("RPC Error!");
-				}
-			});
+				
+		});
 	}
 }
 

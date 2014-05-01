@@ -1,5 +1,6 @@
 package edu.ycp.cs320.stocksimulation.shared;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Currency;
 
@@ -10,7 +11,7 @@ import java.util.Currency;
  *
  */
 
-public class Money {
+public class Money implements Serializable {
 
 	//field(s)
 	private final BigDecimal amount;

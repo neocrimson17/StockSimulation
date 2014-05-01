@@ -1,5 +1,6 @@
 package edu.ycp.cs320.stocksimulation.shared;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -15,7 +16,7 @@ import java.math.BigDecimal;
  *
  */
 
-public class AccountSummary {
+public class AccountSummary implements Serializable {
 
 	//fields
 	private Money totalAmountMoney;

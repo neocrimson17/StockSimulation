@@ -1,5 +1,6 @@
 package edu.ycp.cs320.stocksimulation.shared;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,10 +10,10 @@ import java.util.Map;
  * @author hdao2
  *
  */
-public class StockPortfolio {
+public class StockPortfolio implements Serializable {
 	
 	// Map of stock symbols to the number of shares owned
-	private Map<String, Integer> stocksOwned;
+	private HashMap<String, Integer> stocksOwned;
 	
 	public StockPortfolio() {
 		stocksOwned = new HashMap<String, Integer>();
