@@ -22,6 +22,7 @@ import edu.ycp.cs320.stocksimulation.shared.Search;
 
 import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.DecoratedTabPanel;
+import com.google.gwt.widget.client.TextButton;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -137,6 +138,23 @@ public class StockSimulationWebApp implements EntryPoint {
 		});
 		mainPanel.add(btnWithdraw, 429, 70);
 		
+		TextBox stockTextBox = new TextBox();
+		mainPanel.add(stockTextBox, 173, 34);
+		stockTextBox.setSize("140px", "18px");
+		
+		Label lblAccountStock = new Label("Account stock: ");
+		mainPanel.add(lblAccountStock, 173, 10);
+		lblAccountStock.setSize("88px", "18px");
+		
+		Button BuyStock = new Button("BuyStock");
+		BuyStock.setText("BuyStock");
+		mainPanel.add(BuyStock, 171, 70);
+		
+		Button SellStock = new Button("SellStock");
+		SellStock.setText("SellStock");
+		mainPanel.add(SellStock, 250, 70);
+		SellStock.setSize("73px", "30px");
+		
 		
 		
 		// Login button
@@ -222,45 +240,39 @@ public class StockSimulationWebApp implements EntryPoint {
 	
 	// add money the user's account
 	protected void handleDeposit() {
-		
 		ammount = Integer.parseInt(fundsTextBox.getText());
-		
 		RPC.cashService.cashDeposit( userName, ammount , new AsyncCallback<AccountSummary>(){
 			@Override
 			public void onFailure( Throwable caught ) {
+				// error when failed
 				fundsResult.setValue("RPC Error!");
 			}
 
 			@Override
 			public void onSuccess(AccountSummary result) {
-				// TODO Auto-generated method stub
-				//result.setAmountMoney(new Money(new BigDecimal(ammount)));
-				
-				System.out.println("the result value is: "+result.getAmountMoney().getAmount().toString());
+				// return the amount of money deposited if successful
+				GWT.log("the result value is: "+result.getAmountMoney().getAmount().toString());
 				fundsResult.setValue(result.getAmountMoney().getAmount().toString());
 			}
-		});
-			
-			
+		});	
 	}
 	
 	// withdraw cash from the user's account
 	protected void handleWithdrawal() {
 		ammount = Integer.parseInt(fundsTextBox.getText());
 		RPC.cashService.cashWithdrawal( userName, ammount, new AsyncCallback<AccountSummary>(){
-
 			@Override
 			public void onFailure(Throwable caught) {
+				// error when failed
 				fundsResult.setValue("RPC Error!");
-				
 			}
-
+			
 			@Override
 			public void onSuccess(AccountSummary result) {
+				// return the amount of money deposited if successful
+				GWT.log("the result value is: "+result.getAmountMoney().getAmount().toString());
 				fundsResult.setValue(result.getAmountMoney().getAmount().toString());
-			}
-				
-				
+			}	
 		});
 	}
 }

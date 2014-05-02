@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import edu.ycp.cs320.stocksimulation.shared.Account;
 import edu.ycp.cs320.stocksimulation.shared.AccountSummary;
 import edu.ycp.cs320.stocksimulation.shared.CashTransaction;
 import edu.ycp.cs320.stocksimulation.shared.Deposit;
@@ -38,12 +40,13 @@ public class FakeDatabase implements IDatabase {
 	//private List<StockPrice> yahooStockPrices;
 	private List<Login> LoginList;
 	private AccountSummary accountSummary;
-	
+	private Account account;
 	//private Map<String, List<StockPrice>> symbolToStockPriceList;
 	
 	
 	public FakeDatabase() {
 		stockList = new ArrayList<Stock>();
+		account = new Account();
 		
 		// Google
 		Stock google = new Stock();

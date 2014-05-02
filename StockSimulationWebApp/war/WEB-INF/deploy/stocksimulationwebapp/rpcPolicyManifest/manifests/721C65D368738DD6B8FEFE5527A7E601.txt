@@ -1,0 +1,2 @@
+serviceClass: edu.ycp.cs320.stocksimulation.client.CashService
+path: 373207056F993BE1DC2DE8A1EBD5ACC8.gwt.rpc

@@ -14,7 +14,7 @@ import java.util.Currency;
 public class Money implements Serializable {
 
 	//field(s)
-	private final BigDecimal amount;
+	private BigDecimal amount;
 	
 	// constructor
 	public Money(){

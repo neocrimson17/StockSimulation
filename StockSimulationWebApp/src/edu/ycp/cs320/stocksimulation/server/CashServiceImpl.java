@@ -16,17 +16,18 @@ import edu.ycp.cs320.stocksimulation.shared.Withdrawal;
 public class CashServiceImpl extends RemoteServiceServlet implements
 		CashService {
 	
-	private AccountSummary accountSummary;
-	private List<Login> LoginList;
+//	private AccountSummary accountSummary;
+//	private List<Login> LoginList;
 	
 	public CashServiceImpl(){
-		LoginList = new ArrayList<Login>();
-		accountSummary = new AccountSummary();
+		//LoginList = new ArrayList<Login>();
+		//accountSummary = new AccountSummary();
 	}
 
 	@Override
 	public AccountSummary cashDeposit(String username, int amount) {
-
+		AccountSummary accountSummary = new AccountSummary();
+		
 		// Link account 
 		//boolean valid = false;
 		Deposit deposit = new Deposit(new Money(new BigDecimal(0))  );
@@ -37,36 +38,26 @@ public class CashServiceImpl extends RemoteServiceServlet implements
 		
 		deposit.setTransaction( id , System.currentTimeMillis() );
 		accountSummary.setAmountMoney(deposit.moneyTransaction(money));
-		System.out.println("it got to here!");
+		System.out.println("the amount deposited in account summary was: "+accountSummary.getAmountMoney().getAmount().toString());
 		
 		return accountSummary;
 	}
 
 	@Override
 	public AccountSummary cashWithdrawal(String username, int amount) {
+		AccountSummary accountSummary = new AccountSummary();
+
 		// Link account 
-		boolean valid = false;
+		//boolean valid = false;
 		Withdrawal withdraw = new Withdrawal(new Money(new BigDecimal(0)));
 		//Transaction transaction = new Transaction();
 		int id = 1234;
+		//initialize money object to the specified amount
+		Money money = new Money(new BigDecimal(amount));
+		// compute the amount and store in accountSummary
+		accountSummary.setAmountMoney(withdraw.moneyTransaction(money));
 		
-		// Checks that username is valid
-		for(Login login : LoginList)
-		{
-			if (login.getName().equals(username)) {
-					valid = true;
-			}
-		}
-		
-		//Deposit
-		if(valid == true) // Only deposit if the username is valid
-		{
-			Money money = new Money(new BigDecimal(amount));
-		
-			withdraw.setTransaction( id , System.currentTimeMillis() );
-			accountSummary.setAmountMoney(withdraw.moneyTransaction(money));
-		}
-		
+		System.out.println("the amount withdrew in account summary was: "+accountSummary.getAmountMoney().getAmount().toString());
 		
 		return accountSummary;
 	}
