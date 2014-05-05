@@ -283,5 +283,19 @@ public class FakeDatabase implements IDatabase {
 		
 		return valid;
 	}
+
+	@Override
+	public boolean buyStock(String user, int amount, String stockType) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean sellStock(String user, int amount, String stockType) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
 	
 }

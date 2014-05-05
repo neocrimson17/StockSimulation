@@ -138,9 +138,9 @@ public class StockSimulationWebApp implements EntryPoint {
 		});
 		mainPanel.add(btnWithdraw, 429, 70);
 		
-		TextBox stockTextBox = new TextBox();
-		mainPanel.add(stockTextBox, 173, 34);
-		stockTextBox.setSize("140px", "18px");
+		TextBox stockTextBoxAmount = new TextBox();
+		mainPanel.add(stockTextBoxAmount, 173, 34);
+		stockTextBoxAmount.setSize("140px", "18px");
 		
 		Label lblAccountStock = new Label("Account stock: ");
 		mainPanel.add(lblAccountStock, 173, 10);
@@ -148,12 +148,24 @@ public class StockSimulationWebApp implements EntryPoint {
 		
 		Button BuyStock = new Button("BuyStock");
 		BuyStock.setText("BuyStock");
-		mainPanel.add(BuyStock, 171, 70);
+		mainPanel.add(BuyStock, 173, 103);
 		
 		Button SellStock = new Button("SellStock");
 		SellStock.setText("SellStock");
-		mainPanel.add(SellStock, 250, 70);
+		mainPanel.add(SellStock, 252, 103);
 		SellStock.setSize("73px", "30px");
+		
+		TextBox StockTypeTextBox = new TextBox();
+		mainPanel.add(StockTypeTextBox, 173, 70);
+		StockTypeTextBox.setSize("140px", "18px");
+		
+		Label lblEnterStockType = new Label("Enter Stock Type:");
+		mainPanel.add(lblEnterStockType, 56, 70);
+		lblEnterStockType.setSize("111px", "18px");
+		
+		Label lblEnterStockAmount = new Label("Enter Stock Amount:");
+		mainPanel.add(lblEnterStockAmount, 42, 34);
+		lblEnterStockAmount.setSize("127px", "18px");
 		
 		
 		

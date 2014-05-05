@@ -14,8 +14,12 @@ public interface IDatabase {
 	
 	public boolean search( String symbol );
 	
-	public boolean cashDeposit( String user, int ammount );
+	public boolean cashDeposit( String user, int amount );
 	
-	public boolean cashWithdrawal( String user, int ammount );
+	public boolean cashWithdrawal( String user, int amount );
+	
+	public boolean buyStock( String user, int amount, String stockType);
+	
+	public boolean sellStock( String user, int amount, String stockType );
 
 }
