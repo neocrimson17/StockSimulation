@@ -33,6 +33,10 @@ public class Money implements Serializable {
 
 	// Subtract given amount of money, returning a new amount of money
 	public Money subtract(Money money) {
+//		if (amount.compareTo(money.getAmount()) < 0){
+//			System.out.println("the amount withdraw is greater than the amount in the account!");
+//			return new Money(amount);
+//		}
 		return new Money(amount.subtract(money.getAmount()));
 	}
 	

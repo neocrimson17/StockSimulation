@@ -231,12 +231,7 @@ public class FakeDatabase implements IDatabase {
 	@Override
 	public boolean cashDeposit( String username, int amount ){
 		
-		
-		// Link account 
-		//Boolean valid = false;
-		Deposit deposit = new Deposit(new Money(new BigDecimal(amount))  );
-		//Transaction transaction = new Transaction();
-		//int accountId = -1;
+		Deposit deposit = new Deposit(new Money(new BigDecimal(amount)));
 		
 		// Checks that username is valid
 		Login accountLogin = findLogin(username);
@@ -244,15 +239,6 @@ public class FakeDatabase implements IDatabase {
 		//Deposit
 		if( accountLogin != null ) // Only deposit if the username is valid
 		{
-//			BigDecimal val = new BigDecimal( amount );
-//			Money money = new Money(val);
-		
-			/*
-			deposit.setTransaction( id , System.currentTimeMillis() );
-			deposit.moneyTransaction( money );
-			accountSummary.setAmountMoney( money );
-			*/
-			
 			// Assign a unique id to this transaction
 			deposit.setId(nextTransactionId);
 			deposit.setAccountId(accountLogin.getId()); // associate transaction with the user's account
@@ -283,33 +269,24 @@ public class FakeDatabase implements IDatabase {
 	
 	@Override
 	public boolean cashWithdrawal( String username, int amount ){
-		
-		Boolean valid = false;
-		Withdrawal withdrawal = new Withdrawal(new Money(new BigDecimal(amount)));
-		//Transaction transaction = new Transaction();
-		int id = 4321;
+		Withdrawal withdraw = new Withdrawal(new Money(new BigDecimal(amount)));
 		
 		// Checks that username is valid
-		for(Login login : LoginList)
+		Login accountLogin = findLogin(username);
+		
+		//Withdraw
+		if( accountLogin != null ) // Only deposit if the username is valid
 		{
-			if (login.getName().equals(username)) {
-					valid = true;
-			}
+			// Assign a unique id to this transaction
+			withdraw.setId(nextTransactionId);
+			withdraw.setAccountId(accountLogin.getId()); // associate transaction with the user's account
+			nextTransactionId++;
+			
+			// Add the transaction to the list of transactions
+			transactionList.add(withdraw);
 		}
 		
-		//Withdrawal
-		if( valid == true) // Only withdraw if the username is valid
-		{
-			BigDecimal val = new BigDecimal( amount );
-			Money money = new Money(val);
-		
-			withdrawal.setTransaction( id , System.currentTimeMillis() );
-			withdrawal.moneyTransaction( money );
-//			accountSummary.setAmountMoney( money );
-		}
-		
-		
-		return valid;
+		return accountLogin != null;
 	}
 
 	@Override
