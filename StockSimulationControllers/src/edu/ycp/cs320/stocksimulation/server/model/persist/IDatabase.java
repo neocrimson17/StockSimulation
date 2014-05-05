@@ -4,6 +4,7 @@ import edu.ycp.cs320.stocksimulation.shared.Login;
 import edu.ycp.cs320.stocksimulation.shared.Search;
 import edu.ycp.cs320.stocksimulation.shared.Stock;
 import edu.ycp.cs320.stocksimulation.shared.StockHistory;
+import edu.ycp.cs320.stocksimulation.shared.Transaction;
 
 public interface IDatabase {
 	public StockHistory getStockPricesForStock(Stock stock, long beginTimestamp, long endTimestamp); 
@@ -21,5 +22,9 @@ public interface IDatabase {
 	public boolean buyStock( String user, int amount, String stockType);
 	
 	public boolean sellStock( String user, int amount, String stockType );
+
+	public Transaction[] getTransactionsForAccount(String username);
+
+	//public StockHistory getStockHistory(String stockType);
 
 }

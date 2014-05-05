@@ -1,9 +1,10 @@
 package edu.ycp.cs320.stocksimulation.shared;
 
+/**
+ * Class to represent an inventory item.
+ */
 public class Login {
-	/**
-	 * Class to represent an inventory item.
-	 */
+		private int id; // This also serves as the account id
 		private String username;
 		private String password;
 
@@ -23,6 +24,14 @@ public class Login {
 		public Login(String username, String password) {
 			this.username = username;
 			this.password = password;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+		
+		public int getId() {
+			return id;
 		}
 		
 		/**

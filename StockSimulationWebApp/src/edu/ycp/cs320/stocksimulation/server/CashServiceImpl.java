@@ -7,6 +7,7 @@ import java.util.List;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import edu.ycp.cs320.stocksimulation.client.CashService;
+import edu.ycp.cs320.stocksimulation.server.controllers.DepositController;
 import edu.ycp.cs320.stocksimulation.shared.AccountSummary;
 import edu.ycp.cs320.stocksimulation.shared.Deposit;
 import edu.ycp.cs320.stocksimulation.shared.Login;
@@ -26,6 +27,7 @@ public class CashServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public AccountSummary cashDeposit(String username, int amount) {
+		/*
 		AccountSummary accountSummary = new AccountSummary();
 		
 		// Link account 
@@ -41,6 +43,10 @@ public class CashServiceImpl extends RemoteServiceServlet implements
 		System.out.println("the amount deposited in account summary was: "+accountSummary.getAmountMoney().getAmount().toString());
 		
 		return accountSummary;
+		*/
+		
+		DepositController controller = new DepositController();
+		return controller.cashDeposit(username, amount);
 	}
 
 	@Override

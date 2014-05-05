@@ -37,14 +37,16 @@ public class AccountSummaryCalculatorTest {
 		dep.setTimestamp(100);
 		account.addTransaction(dep);
 		
+		/*
 		// There will be no stock transactions in this test, so
 		// an empty StockHistory is fine
 		StockHistory hist = new StockHistory();
+		*/
 
 		// Use an AccountSummaryCalculator to determine the effect of the
 		// transactions in the account
 		AccountSummaryCalculator cal = new AccountSummaryCalculator();
-		AccountSummary summary = cal.calculate(account, hist, 0, 1000);
+		AccountSummary summary = cal.calculate(account, /*hist,*/ 0, 1000);
 		
 		// Total cash should be $100
 		assertEquals(new Money(new BigDecimal(100)), summary.getAmountMoney());
@@ -54,7 +56,7 @@ public class AccountSummaryCalculatorTest {
 	public void testCalculateStockTransaction(){
 		// Create account
 		Account account = new Account();
-		StockHistory hist = new StockHistory();
+		//StockHistory hist = new StockHistory();
 		StockPrice price = new StockPrice();
 		Stock stock = new Stock();
 		
@@ -66,11 +68,11 @@ public class AccountSummaryCalculatorTest {
 		price.setStockId(0);
 		price.setTimestamp(10L);
 		price.setPrice(new Money(new BigDecimal(100)));
-		hist.add(price);
+		//hist.add(price);
 		account.addTransaction(buy);
 		
 		AccountSummaryCalculator cal = new AccountSummaryCalculator();
-		AccountSummary summary = cal.calculate(account, hist, 0, 1000);
+		AccountSummary summary = cal.calculate(account, /*hist,*/ 0, 1000);
 		
 		assertEquals(100,summary.getAmountStock().getNumShares(stock));
 	}

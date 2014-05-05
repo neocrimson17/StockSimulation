@@ -9,7 +9,7 @@ import java.util.Map;
  *
  */
 public class AccountSummaryCalculator {
-	public AccountSummary calculate(Account account, StockHistory stockHistory, long beginTimestamp, long endTimestamp) {
+	public AccountSummary calculate(Account account, long beginTimestamp, long endTimestamp) {
 		List<Transaction> transactionList = account.getTransactionList();
 		
 		Money totalCash = new Money();

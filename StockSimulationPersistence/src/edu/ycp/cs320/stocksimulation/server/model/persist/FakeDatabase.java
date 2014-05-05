@@ -39,14 +39,18 @@ public class FakeDatabase implements IDatabase {
 	//private List<StockPrice> googleStockPrices;
 	//private List<StockPrice> yahooStockPrices;
 	private List<Login> LoginList;
-	private AccountSummary accountSummary;
-	private Account account;
+	private int nextLoginId = 1;
+	//private AccountSummary accountSummary;
+	//private Account account;
 	//private Map<String, List<StockPrice>> symbolToStockPriceList;
+	
+	private List<Transaction> transactionList;
+	private int nextTransactionId = 1;
 	
 	
 	public FakeDatabase() {
 		stockList = new ArrayList<Stock>();
-		account = new Account();
+		//account = new Account();
 		
 		// Google
 		Stock google = new Stock();
@@ -78,7 +82,12 @@ public class FakeDatabase implements IDatabase {
 		
 		LoginList = new ArrayList<Login>();
 		// Populate initial list with master account
-		LoginList.add(new Login("admin", "admin"));
+		Login login = new Login("admin", "admin");
+		login.setId(nextLoginId);
+		nextLoginId++;
+		LoginList.add(login);
+		
+		transactionList = new ArrayList<Transaction>();
 	}
 
 	private void addStockPrices(String resourceName/*, List<StockPrice> stockPrices*/) {
@@ -224,33 +233,52 @@ public class FakeDatabase implements IDatabase {
 		
 		
 		// Link account 
-		Boolean valid = false;
+		//Boolean valid = false;
 		Deposit deposit = new Deposit(new Money(new BigDecimal(amount))  );
 		//Transaction transaction = new Transaction();
-		int id = 1234;
+		//int accountId = -1;
 		
 		// Checks that username is valid
-		for(Login login : LoginList)
-		{
-			if (login.getName().equals(username)) {
-					valid = true;
-			}
-		}
+		Login accountLogin = findLogin(username);
 		
 		//Deposit
-		if( valid == true) // Only deposit if the username is valid
+		if( accountLogin != null ) // Only deposit if the username is valid
 		{
-			BigDecimal val = new BigDecimal( amount );
-			Money money = new Money(val);
+//			BigDecimal val = new BigDecimal( amount );
+//			Money money = new Money(val);
 		
+			/*
 			deposit.setTransaction( id , System.currentTimeMillis() );
 			deposit.moneyTransaction( money );
 			accountSummary.setAmountMoney( money );
+			*/
+			
+			// Assign a unique id to this transaction
+			deposit.setId(nextTransactionId);
+			deposit.setAccountId(accountLogin.getId()); // associate transaction with the user's account
+			nextTransactionId++;
+			
+			// Add the transaction to the list of transactions
+			transactionList.add(deposit);
 		}
 		
 		
-		return valid;
+		return accountLogin != null;
 			
+	}
+
+	private Login findLogin(String username) {
+		Login accountLogin = null;
+		for(Login login : LoginList)
+		{
+			if (login.getName().equals(username)) {
+					//valid = true;
+					//accountId = login.getId();
+				accountLogin = login;
+				break;
+			}
+		}
+		return accountLogin;
 	}
 	
 	@Override
@@ -277,7 +305,7 @@ public class FakeDatabase implements IDatabase {
 		
 			withdrawal.setTransaction( id , System.currentTimeMillis() );
 			withdrawal.moneyTransaction( money );
-			accountSummary.setAmountMoney( money );
+//			accountSummary.setAmountMoney( money );
 		}
 		
 		
@@ -296,6 +324,24 @@ public class FakeDatabase implements IDatabase {
 		return false;
 	}
 
-	
+	@Override
+	public Transaction[] getTransactionsForAccount(String username) {
+		Login accountLogin = findLogin(username);
+		if (accountLogin == null) {
+			// Unknown username?
+			System.out.println("Can't find transactions for " + username + " (no such user?");
+			return new Transaction[0];
+		}
+		
+		ArrayList<Transaction> result = new ArrayList<Transaction>();
+		
+		for (Transaction txn : transactionList) {
+			if (txn.getAccountId() == accountLogin.getId()) {
+				result.add(txn);
+			}
+		}
+		
+		return result.toArray(new Transaction[result.size()]);
+	}
 	
 }
