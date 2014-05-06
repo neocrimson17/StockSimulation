@@ -23,9 +23,9 @@ public class AccountSummaryCalculator {
 				
 				if (txn instanceof CashTransaction) {
 					CashTransaction cashTxn = (CashTransaction) txn;
-					System.out.print("Processing " + txn.getClass().getSimpleName() + ": " + totalCash.getAmount() + " => ");
+					//System.out.print("Processing " + txn.getClass().getSimpleName() + ": " + totalCash.getAmount() + " => ");
 					totalCash = cashTxn.moneyTransaction(totalCash);
-					System.out.println(totalCash.getAmount());
+					//System.out.println(totalCash.getAmount());
 				} else if (txn instanceof StockTransaction) {
 					
 					StockTransaction stockTxn = (StockTransaction) txn;

@@ -19,6 +19,7 @@ import edu.ycp.cs320.stocksimulation.shared.AccountSummary;
 import edu.ycp.cs320.stocksimulation.shared.Money;
 import edu.ycp.cs320.stocksimulation.shared.Result;
 import edu.ycp.cs320.stocksimulation.shared.Search;
+import edu.ycp.cs320.stocksimulation.shared.Stock;
 
 import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.DecoratedTabPanel;
@@ -34,10 +35,14 @@ public class StockSimulationWebApp implements EntryPoint {
 	 */
 	private Result result;
 	private Result fundsResult;
+	private Result stockResult;
 	private ResultView resultView;
 	private ResultView fundsResultView;
+	private ResultView stockResultview;
 	private String userName, passWord,search;
 	private int ammount;
+	private int stockAmount;
+	private String stockType;
 
 	
 	
@@ -53,6 +58,8 @@ public class StockSimulationWebApp implements EntryPoint {
 	private Button sendButton;
 	private TextBox searchBox;
 	private TextBox fundsTextBox;
+	private TextBox stockTextBoxAmount;
+	private TextBox StockTypeTextBox;
 	
 
 	/**
@@ -61,6 +68,7 @@ public class StockSimulationWebApp implements EntryPoint {
 	public void onModuleLoad() {
 		this.result = new Result();
 		this.fundsResult = new Result();
+		this.stockResult = new Result();
 
 		
 
@@ -75,10 +83,13 @@ public class StockSimulationWebApp implements EntryPoint {
 
 		this.resultView = new ResultView();
 		this.fundsResultView = new ResultView();
+		this.stockResultview = new ResultView();
 		absolutePanel.add(resultView, 200, 10);
 		absolutePanel.add(fundsResultView, 570, 60 );
+		absolutePanel.add(stockResultview, 540, 60);
 		resultView.setModel(result);
-		fundsResultView.setModel( fundsResult );
+		fundsResultView.setModel(fundsResult);
+		stockResultview.setModel(stockResult);
 		
 
 		
@@ -138,7 +149,7 @@ public class StockSimulationWebApp implements EntryPoint {
 		});
 		mainPanel.add(btnWithdraw, 429, 70);
 		
-		TextBox stockTextBoxAmount = new TextBox();
+		this.stockTextBoxAmount = new TextBox();
 		mainPanel.add(stockTextBoxAmount, 173, 34);
 		stockTextBoxAmount.setSize("140px", "18px");
 		
@@ -147,15 +158,24 @@ public class StockSimulationWebApp implements EntryPoint {
 		lblAccountStock.setSize("88px", "18px");
 		
 		Button BuyStock = new Button("BuyStock");
-		BuyStock.setText("BuyStock");
+		BuyStock.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				handleBuyStock();
+			}
+		});
 		mainPanel.add(BuyStock, 173, 103);
 		
 		Button SellStock = new Button("SellStock");
-		SellStock.setText("SellStock");
+		SellStock.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				handleSellStock();
+			}
+		});
+		//SellStock.setText("SellStock");
 		mainPanel.add(SellStock, 252, 103);
-		SellStock.setSize("73px", "30px");
+		//SellStock.setSize("73px", "30px");
 		
-		TextBox StockTypeTextBox = new TextBox();
+		this.StockTypeTextBox = new TextBox();
 		mainPanel.add(StockTypeTextBox, 173, 70);
 		StockTypeTextBox.setSize("140px", "18px");
 		
@@ -263,7 +283,7 @@ public class StockSimulationWebApp implements EntryPoint {
 			@Override
 			public void onSuccess(AccountSummary result) {
 				// return the amount of money deposited if successful
-				GWT.log("the result value is: "+result.getAmountMoney().getAmount().toString());
+				GWT.log("the result cash deposit value is: "+result.getAmountMoney().getAmount().toString());
 				fundsResult.setValue(result.getAmountMoney().getAmount().toString());
 			}
 		});	
@@ -282,10 +302,56 @@ public class StockSimulationWebApp implements EntryPoint {
 			@Override
 			public void onSuccess(AccountSummary result) {
 				// return the amount of money deposited if successful
-				GWT.log("the result value is: "+result.getAmountMoney().getAmount().toString());
+				GWT.log("the result of cast withdraw value is: "+result.getAmountMoney().getAmount().toString());
 				fundsResult.setValue(result.getAmountMoney().getAmount().toString());
 			}	
 		});
+	}
+	
+	// buy stock and add to the user's account
+	protected void handleBuyStock() {
+		stockAmount = Integer.parseInt(stockTextBoxAmount.getText());
+		stockType = String.valueOf(StockTypeTextBox.getText());
+		final Stock stock = new Stock();
+		stock.setName(stockType);
+		RPC.stockService.buyStock(userName, stockAmount , stock, new AsyncCallback<AccountSummary>(){
+			@Override
+			public void onFailure( Throwable caught ) {
+				// error when failed
+				stockResult.setValue("RPC Error!");
+			}
+
+			@Override
+			public void onSuccess(AccountSummary result) {
+				// return the amount of money deposited if successful
+				GWT.log("the result of buying stock value is: "+result.getAmountStock().getNumShares(stock));
+				String string = String.valueOf(result.getAmountStock().getNumShares(stock));
+				stockResult.setValue(string);
+			}
+		});	
+	}
+		
+    // sell stock and add them to the user's account
+	protected void handleSellStock() {
+		stockAmount = Integer.parseInt(stockTextBoxAmount.getText());
+		stockType = String.valueOf(StockTypeTextBox.getText());
+		final Stock stock = new Stock();
+		stock.setName(stockType);
+		RPC.stockService.sellStock(userName, stockAmount , stock, new AsyncCallback<AccountSummary>(){
+			@Override
+			public void onFailure( Throwable caught ) {
+				// error when failed
+				stockResult.setValue("RPC Error!");
+			}
+
+			@Override
+			public void onSuccess(AccountSummary result) {
+				// return the amount of money deposited if successful
+				GWT.log("the result of buying stock value is: "+result.getAmountStock().getNumShares(stock));
+				String string = String.valueOf(result.getAmountStock().getNumShares(stock));
+				stockResult.setValue(string);
+			}
+		});	
 	}
 }
 

@@ -19,9 +19,9 @@ public interface IDatabase {
 	
 	public boolean cashWithdrawal( String user, int amount );
 	
-	public boolean buyStock( String user, int amount, String stockType);
+	public boolean buyStock( String user, int amount, Stock stockType);
 	
-	public boolean sellStock( String user, int amount, String stockType );
+	public boolean sellStock( String user, int amount, Stock stockType );
 
 	public Transaction[] getTransactionsForAccount(String username);
 

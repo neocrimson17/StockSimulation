@@ -21,11 +21,13 @@ import java.util.StringTokenizer;
 
 import edu.ycp.cs320.stocksimulation.shared.Account;
 import edu.ycp.cs320.stocksimulation.shared.AccountSummary;
+import edu.ycp.cs320.stocksimulation.shared.BuyStock;
 import edu.ycp.cs320.stocksimulation.shared.CashTransaction;
 import edu.ycp.cs320.stocksimulation.shared.Deposit;
 import edu.ycp.cs320.stocksimulation.shared.Login;
 import edu.ycp.cs320.stocksimulation.shared.Money;
 import edu.ycp.cs320.stocksimulation.shared.Search;
+import edu.ycp.cs320.stocksimulation.shared.SellStock;
 import edu.ycp.cs320.stocksimulation.shared.Stock;
 import edu.ycp.cs320.stocksimulation.shared.StockHistory;
 import edu.ycp.cs320.stocksimulation.shared.StockPrice;
@@ -290,15 +292,49 @@ public class FakeDatabase implements IDatabase {
 	}
 
 	@Override
-	public boolean buyStock(String user, int amount, String stockType) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean buyStock(String user, int amount, Stock stockType) {
+	
+		BuyStock buyStock = new BuyStock(amount,stockType);
+		
+		// Checks that username is valid
+		Login accountLogin = findLogin(user);
+		
+		//Withdraw
+		if( accountLogin != null ) // Only deposit if the username is valid
+		{
+			// Assign a unique id to this transaction
+			buyStock.setId(nextTransactionId);
+			buyStock.setAccountId(accountLogin.getId()); // associate transaction with the user's account
+			nextTransactionId++;
+			
+			// Add the transaction to the list of transactions
+			transactionList.add(buyStock);
+		}
+		
+		return accountLogin != null;
+		
 	}
 
 	@Override
-	public boolean sellStock(String user, int amount, String stockType) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean sellStock(String user, int amount, Stock stockType) {
+		SellStock sellStock = new SellStock(amount,stockType);
+		
+		// Checks that username is valid
+		Login accountLogin = findLogin(user);
+		
+		//Withdraw
+		if( accountLogin != null ) // Only deposit if the username is valid
+		{
+			// Assign a unique id to this transaction
+			sellStock.setId(nextTransactionId);
+			sellStock.setAccountId(accountLogin.getId()); // associate transaction with the user's account
+			nextTransactionId++;
+			
+			// Add the transaction to the list of transactions
+			transactionList.add(sellStock);
+		}
+		
+		return accountLogin != null;
 	}
 
 	@Override
