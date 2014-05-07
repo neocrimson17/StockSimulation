@@ -1,5 +1,6 @@
 package edu.ycp.cs320.stocksimulation.shared;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  * 
  * @author kmusco
  */
-public class Stock {
+public class Stock implements Serializable {
 	
 	// fields
 	private int id;

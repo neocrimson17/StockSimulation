@@ -86,7 +86,7 @@ public class StockSimulationWebApp implements EntryPoint {
 		this.stockResultview = new ResultView();
 		absolutePanel.add(resultView, 200, 10);
 		absolutePanel.add(fundsResultView, 570, 60 );
-		absolutePanel.add(stockResultview, 540, 60);
+		absolutePanel.add(stockResultview, 190, 60);
 		resultView.setModel(result);
 		fundsResultView.setModel(fundsResult);
 		stockResultview.setModel(stockResult);
@@ -313,7 +313,7 @@ public class StockSimulationWebApp implements EntryPoint {
 		stockAmount = Integer.parseInt(stockTextBoxAmount.getText());
 		stockType = String.valueOf(StockTypeTextBox.getText());
 		final Stock stock = new Stock();
-		stock.setName(stockType);
+		stock.setSymbol(stockType);
 		RPC.stockService.buyStock(userName, stockAmount , stock, new AsyncCallback<AccountSummary>(){
 			@Override
 			public void onFailure( Throwable caught ) {
