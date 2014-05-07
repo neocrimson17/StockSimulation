@@ -22,6 +22,10 @@
     <servlet-name>StockServiceImpl</servlet-name>
     <servlet-class>edu.ycp.cs320.stocksimulation.server.StockServiceImpl</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>RegistrationServiceImpl</servlet-name>
+    <servlet-class>edu.ycp.cs320.stocksimulation.server.RegistrationServiceImpl</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
@@ -36,8 +40,12 @@
     <url-pattern>/stocksimulationwebapp/cashService</url-pattern>
   </servlet-mapping>
    <servlet-mapping>
-   <servlet-name>StockServiceImpl</servlet-name>
-    <url-pattern>/stocksimulationwebapp/stockService</url-pattern>
+	  <servlet-name>StockServiceImpl</servlet-name>
+	  <url-pattern>/stocksimulationwebapp/stockService</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+   <servlet-name>RegistrationServiceImpl</servlet-name>
+   <url-pattern>/stocksimulationwebapp/register</url-pattern>
   </servlet-mapping>
   
   <!--  Servlet context listeners -->

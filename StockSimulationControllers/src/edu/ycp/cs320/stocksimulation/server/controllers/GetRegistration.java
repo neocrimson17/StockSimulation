@@ -4,10 +4,9 @@ import edu.ycp.cs320.stocksimulation.server.model.persist.DatabaseProvider;
 import edu.ycp.cs320.stocksimulation.server.model.persist.IDatabase;
 import edu.ycp.cs320.stocksimulation.shared.Login;
 
-public class AccountRegistration {
-	public Login accountRegister(String user, String pass){
-		
+public class GetRegistration {
+	public boolean getRegistration(String username, String password, String confirmPassword) {
 		IDatabase db = DatabaseProvider.getInstance();
-		return db.postLogin(user, pass);
+		return db.postLogin(username, password, confirmPassword);
 	}
 }

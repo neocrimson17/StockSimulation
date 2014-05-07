@@ -202,22 +202,23 @@ public class FakeDatabase implements IDatabase {
 	}
 
 	@Override
-	public Login postLogin(String username, String password) {
+	public boolean postLogin(String username, String password, String confirmPassword) {
 		// Add account if it does not exist
 		boolean result = false;
 		//Check to make sure
 		for (Login login: LoginList){
-			if (login.getName().equals(username) && login.getPassword().equals(password)){
+			if (login.getName().equals(username)){
 				result = true;
+				System.out.println("That particular username has already been registered!");
 				break;
 			}
 		}
-		if (result == false){
+		if (result == false && password.equals(confirmPassword)){
 			Login newLogin = new Login(username, password);
 			LoginList.add(newLogin);
-			return newLogin;
+			return true;
 		}
-		return null;
+		return false;
 	}
 	
 	@Override

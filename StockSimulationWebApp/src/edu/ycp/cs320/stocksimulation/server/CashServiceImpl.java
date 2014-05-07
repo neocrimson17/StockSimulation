@@ -14,7 +14,13 @@ import edu.ycp.cs320.stocksimulation.shared.Deposit;
 import edu.ycp.cs320.stocksimulation.shared.Login;
 import edu.ycp.cs320.stocksimulation.shared.Money;
 import edu.ycp.cs320.stocksimulation.shared.Withdrawal;
-
+/**
+ * This class is responsible for implementing the deposit and withdraw methods 
+ * It will return an AccountSummary object which enable the client to view the total amount of money he/she
+ * has after a deposit or withdraw
+ * @author hdao2
+ *
+ */
 public class CashServiceImpl extends RemoteServiceServlet implements
 		CashService {
 	

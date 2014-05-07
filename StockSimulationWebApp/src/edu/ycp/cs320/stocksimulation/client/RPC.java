@@ -14,5 +14,8 @@ public class RPC {
 	
 	public static final StockServiceAsync stockService =
 			GWT.create(StockService.class);
+	
+	public static final RegistrationServiceAsync registrationService =
+			GWT.create(RegistrationService.class);
 
 }

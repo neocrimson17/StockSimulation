@@ -11,7 +11,7 @@ public interface IDatabase {
 	
 	public boolean getLogin(String username, String password);
 	
-	public Login postLogin(String username, String password);
+	public boolean postLogin(String username, String password, String confirmPassword);
 	
 	public boolean search( String symbol );
 	
