@@ -26,7 +26,7 @@ public class DerbyDatabase implements IDatabase {
 	private interface ITransaction<ResultType> {
 		public ResultType execute(Connection conn) throws SQLException;
 	}
-	
+	//nothing
 	private static final int MAX_ATTEMPTS = 10;
 
 	@Override
