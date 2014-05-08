@@ -1,0 +1,2 @@
+serviceClass: edu.ycp.cs320.stocksimulation.client.RegistrationService
+path: EB39D6AF56BE0DAD40E1D0796D8CA90E.gwt.rpc
