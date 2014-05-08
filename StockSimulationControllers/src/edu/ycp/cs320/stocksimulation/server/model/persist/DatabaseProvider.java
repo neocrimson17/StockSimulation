@@ -8,6 +8,9 @@ public class DatabaseProvider {
 	}
 	
 	public static IDatabase getInstance() {
+		if (theInstance == null) {
+			throw new IllegalStateException("IDatabase instance has not been set!");
+		}
 		return theInstance;
 	}
 }
