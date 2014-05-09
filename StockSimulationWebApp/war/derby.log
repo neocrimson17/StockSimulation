@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Thu May 08 17:14:19 EDT 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0145-ddaf-568c-000002f52c68 
+Fri May 09 16:28:36 EDT 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0145-e2a5-cfb8-000002f01108 
 on database directory H:\stocksimulation.db with class loader ContextLoader@null 
 Loaded from file:/H:/CS%20320%20Software%20Engineering%20and%20Design/CS320_Derby/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.7.0_17-b02
+java.runtime.version=1.7.0_07-b11
 user.dir=H:\CS 320 Software Engineering and Design\StockSimulation\StockSimulationWebApp\war
 os.name=Windows 7
 os.arch=amd64

@@ -36,9 +36,11 @@ public class StockSimulationWebApp implements EntryPoint {
 	private Result result;
 	private Result fundsResult;
 	private Result stockResult;
+	private Result searchResult;
 	private ResultView resultView;
 	private ResultView fundsResultView;
 	private ResultView stockResultview;
+	private ResultView searchResultview;
 	private String userName, passWord,search, confirmPassword;
 	private int ammount;
 	private int stockAmount;
@@ -76,6 +78,7 @@ public class StockSimulationWebApp implements EntryPoint {
 		this.result = new Result();
 		this.fundsResult = new Result();
 		this.stockResult = new Result();
+		this.searchResult = new Result();
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
@@ -88,12 +91,15 @@ public class StockSimulationWebApp implements EntryPoint {
 		this.resultView = new ResultView();
 		this.fundsResultView = new ResultView();
 		this.stockResultview = new ResultView();
+		this.searchResultview = new ResultView();
 		absolutePanel.add(resultView, 200, 39);
 		absolutePanel.add(fundsResultView, 570, 87 );
 		absolutePanel.add(stockResultview, 400, 87);
+		absolutePanel.add(searchResultview, 20, 80);
 		resultView.setModel(result);
 		fundsResultView.setModel(fundsResult);
 		stockResultview.setModel(stockResult);
+		searchResultview.setModel(searchResult);
 		
 		// Username entry
 		this.nameField = new TextBox();
@@ -230,22 +236,26 @@ public class StockSimulationWebApp implements EntryPoint {
 		btnSearch.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
 			search = String.valueOf(searchBox.getText());
-			RPC.searchService.search(search, new AsyncCallback<Boolean>(){
+			RPC.searchService.search(search, new AsyncCallback<Stock>(){
 
 				@Override
 				public void onFailure(Throwable caught) {
-					result.setValue("RPC Error!");	
+					System.out.println("RPC error");
+					
 				}
 
 				@Override
-				public void onSuccess(Boolean r) {
-					if(r)
-						result.setValue("Search success");
-					else
-						result.setValue("Search fail");
+				public void onSuccess(Stock result) {
+					if( result.getName() != null ) {
+						System.out.println("The result stock is: " + result.getSymbol() );
+						searchResult.setValue( result.getSymbol() );
+					} else {
+						System.out.println("The stock is NULL");
+						searchResult.setValue( "Stock is NULL" );
+					}
 					
 				}
-				
+
 			});
 				
 				}

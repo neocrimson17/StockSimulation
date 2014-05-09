@@ -111,9 +111,9 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	@Override
-	public boolean search(String symbol) {
+	public Stock search(String symbol) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
@@ -140,15 +140,6 @@ public class DerbyDatabase implements IDatabase {
 		return false;
 	}
 	
-//	// TODO: eliminate this: should just call doFindLogin from a transaction
-//	private Login findLogin(final String username) {
-//		return executeTransaction(new ITransaction<Login>() {
-//			@Override
-//			public Login execute(Connection conn) throws SQLException {
-//				return doFindLogin(username, conn);
-//			}
-//		});
-//	}
 	
 
 	@Override

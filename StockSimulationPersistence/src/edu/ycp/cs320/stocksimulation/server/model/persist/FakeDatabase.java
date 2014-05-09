@@ -225,10 +225,8 @@ public class FakeDatabase implements IDatabase {
 	// Used to contain code to grab data from Yahoo API. 
 	// Moved code to seperate program on request from Dr.Hovemeyer
 	
-	public boolean search( String symbol ){
-		
-		//TODO
-		return true;
+	public Stock search( String symbol ){
+		return findStockBySymbol(symbol);
 	}
 	
 	@Override

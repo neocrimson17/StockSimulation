@@ -13,7 +13,7 @@ public interface IDatabase {
 	
 	public boolean postLogin(String username, String password, String confirmPassword);
 	
-	public boolean search( String symbol );
+	public Stock search( String symbol );
 	
 	public boolean cashDeposit( String user, int amount );
 	
