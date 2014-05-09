@@ -228,59 +228,29 @@ public class StockSimulationWebApp implements EntryPoint {
 		// search button
 		Button btnSearch = new Button("Search");
 		btnSearch.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				search = String.valueOf(searchBox.getText());
-				RPC.searchService.search(search, new AsyncCallback<Boolean>(){
+		public void onClick(ClickEvent event) {
+			search = String.valueOf(searchBox.getText());
+			RPC.searchService.search(search, new AsyncCallback<Boolean>(){
 
-					@Override
-					public void onFailure(Throwable caught) {
-						result.setValue("RPC Error!");	
-					}
+				@Override
+				public void onFailure(Throwable caught) {
+					result.setValue("RPC Error!");	
+				}
 
-					@Override
-					public void onSuccess(Boolean r) {
-						if(r)
-							result.setValue("Search success");
-						else
-							result.setValue("Search fail");
-						
-					}
+				@Override
+				public void onSuccess(Boolean r) {
+					if(r)
+						result.setValue("Search success");
+					else
+						result.setValue("Search fail");
 					
-				});
-//						URL url;
-//						String symbol = String.valueOf(searchBox.getText());
-//						try {
-//							
-//							String baseUrl = "http://download.finance.yahoo.com/d/quotes.csv?s=%40%5EDJI," + symbol + "&f=nsl1op&e=.csv";
-//						
-//							url = new URL(baseUrl);
-//							URLConnection conn = url.openConnection();
-//						
-//							BufferedReader br = new BufferedReader( new InputStreamReader(conn.getInputStream()));
-//					
-//							String inputLine;
-//							while( (inputLine = br.readLine()) != null ) {
-//								System.out.println( inputLine );
-//							}
-//						
-//							br.close();
-//						
-//							System.out.println("Done");
-//						} catch ( MalformedURLException e) {
-//							e.printStackTrace();
-//						} catch ( IOException e ) {
-//							e.printStackTrace();
-//						}
-					
-					}
-				});
-				absolutePanel.add(btnSearch, 126, 10);
+				}
 				
+			});
 				
-				
-				
-				
-				
+				}
+			});
+			absolutePanel.add(btnSearch, 126, 10);				
 				
 	}
 	
@@ -315,7 +285,7 @@ public class StockSimulationWebApp implements EntryPoint {
 				if( r ) {
 					result.setValue("Registration is a success!");
 				}else
-					result.setValue("Invalid username/password");
+					result.setValue("invalid username/password");
 			}
 
 			@Override
